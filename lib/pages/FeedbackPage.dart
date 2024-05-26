@@ -1,0 +1,152 @@
+import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_database/firebase_database.dart';
+import 'package:sfit/pages/Homepage.dart';
+class FeedbackPage extends StatefulWidget {
+  final String coachName;
+
+  FeedbackPage({required this.coachName});
+
+  @override
+  _FeedbackPageState createState() => _FeedbackPageState();
+}
+
+class _FeedbackPageState extends State<FeedbackPage> {
+  int selectedStars = 0;
+  String feedback = '';
+
+  final databaseReference = FirebaseDatabase.instance.reference();
+  final user = FirebaseAuth.instance.currentUser;
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: Colors.white,
+      body: Center(
+        child: SingleChildScrollView(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(
+                "Congratulations!",
+                style: TextStyle(
+                  fontSize: 21.0,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              SizedBox(height: 5.0),
+              Container(
+                height: 1.0,
+                width: 800.0,
+                color: const Color.fromARGB(255, 120, 120, 120),
+                margin: EdgeInsets.symmetric(vertical: 10.0),
+              ),
+              Text(
+                "How was your experience?",
+                style: TextStyle(
+                  fontSize: 45.0,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              SizedBox(height: 50.0),
+              Text(
+                "Rate Your Experience",
+                style: TextStyle(
+                  fontSize: 16.0,
+                ),
+              ),
+              SizedBox(height: 20.0),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  for (int i = 0; i < 5; i++)
+                    Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 4.0),
+                      child: GestureDetector(
+                        onTap: () {
+                          setState(() {
+                            selectedStars = i + 1;
+                          });
+                        },
+                        child: Icon(
+                          Icons.star,
+                          color: i < selectedStars
+                              ? Color.fromARGB(255, 116, 220, 255)
+                              : Colors.grey,
+                          size: 43.0,
+                        ),
+                      ),
+                    ),
+                ],
+              ),
+              SizedBox(height: 50.0),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 40.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      "Tell us more about your experience",
+                      style: TextStyle(
+                        fontSize: 18.0,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    SizedBox(height: 10.0),
+                    TextFormField(
+                      onChanged: (value) {
+                        feedback = value;
+                      },
+                      maxLines: 5,
+                      decoration: InputDecoration(
+                        hintText: "Share your experience here",
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(10.0),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              SizedBox(height: 30.0),
+              ElevatedButton(
+                onPressed: () async {
+                  if (user != null) {
+                    String? username = user?.displayName;
+                    String? email = user?.email;
+                    await databaseReference.child("Feedback").push().set({
+                      'Stars Rating': selectedStars,
+                      'Feedback message': feedback,
+                      'Trainee Username': username,
+                      'Trainee Email': email,
+                      'Coach name': widget.coachName,
+                    });
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => SportsCoachesPage(userDetails: {},)),
+                    );
+                  }
+                },
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.blue,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10.0),
+                  ),
+                  padding: EdgeInsets.symmetric(horizontal: 120.0, vertical: 18.0),
+                ),
+                child: Text(
+                  "Done!",
+                  style: TextStyle(
+                    fontSize: 16,
+                    color: Colors.black,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
