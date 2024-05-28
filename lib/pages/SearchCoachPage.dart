@@ -24,7 +24,6 @@ class Coach {
   });
 }
 
-
 List<Coach> favoriteCoaches = [];
 
 class SearchCoachesPage extends StatefulWidget {
@@ -144,8 +143,8 @@ class _SearchCoachesPageState extends State<SearchCoachesPage> {
                 onTap: () {
                   setState(() {
                     filteredCoaches.addAll([
-                      Coach(name: "Sarah Johnson", image: "lib/images/Sarah.jpg", rating: 4.9, sport: "Basketball", age: 31, coachingHours: "4PM-9PM"),
-                      Coach(name: "Alex Rodriguez", image: "lib/images/Alex.jpeg", rating: 4.6, sport: "Baseball", age: 35, coachingHours: "9AM-2PM"),
+                      Coach(name: "Sarah Johnson", image: "lib/images/Sarah.jpg", rating: 4.9, sport: "Basketball", age: 31, coachingHours: "4PM-9PM", isLocal: true),
+                      Coach(name: "Alex Rodriguez", image: "lib/images/Alex.jpeg", rating: 4.6, sport: "Baseball", age: 35, coachingHours: "9AM-2PM", isLocal: true),
                     ]);
                   });
                 },
@@ -206,7 +205,6 @@ class _SearchCoachesPageState extends State<SearchCoachesPage> {
     );
   }
 }
-
 class CoachCard extends StatefulWidget {
   final String coachName;
   final String coachImage;
@@ -348,6 +346,8 @@ class _CoachCardState extends State<CoachCard> {
                           coachName: widget.coachName,
                           coachImage: widget.coachImage,
                           coachRating: widget.coachRating,
+                          coachSport: widget.sport,
+                          isLocalImage: widget.isLocalImage,
                         ),
                       ),
                     );

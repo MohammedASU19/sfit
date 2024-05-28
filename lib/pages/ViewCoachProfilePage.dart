@@ -7,25 +7,33 @@ import 'package:sfit/pages/ExperiencesPage.dart';
 class ViewCoachProfilePage extends StatelessWidget {
   final String coachName;
   final String coachImage;
-  final double  coachRating;
+  final double coachRating;
+  final String coachSport;
+  final bool isLocalImage;
 
-  const ViewCoachProfilePage({super.key, 
+  const ViewCoachProfilePage({
+    super.key,
     required this.coachName,
     required this.coachImage,
     required this.coachRating,
+    required this.coachSport,
+    required this.isLocalImage,
   });
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(
+        backgroundColor: Colors.white,
         appBar: AppBar(
-          title: const Text('Profile Page'),
+          backgroundColor: Colors.white,
+          title: const Text('Coach Profile'),
           leading: IconButton(
-          icon: const Icon(Icons.arrow_back),
-          onPressed: () {
-            Navigator.pop(context);
-          },
+            icon: const Icon(Icons.arrow_back),
+            onPressed: () {
+              Navigator.pop(context);
+            },
           ),
         ),
         body: SingleChildScrollView(
@@ -44,9 +52,9 @@ class ViewCoachProfilePage extends StatelessWidget {
                       ),
                     ),
                   ),
-                  const CircleAvatar(
+                  CircleAvatar(
                     radius: 50,
-                     backgroundImage: NetworkImage('https://cdn-icons-png.flaticon.com/512/2585/2585583.png'),
+                    backgroundImage: isLocalImage ? AssetImage(coachImage) : NetworkImage(coachImage) as ImageProvider,
                   ),
                 ],
               ),
@@ -101,8 +109,10 @@ class ViewCoachProfilePage extends StatelessWidget {
                     ),
                     GestureDetector(
                       onTap: () {
-                        // Add functionality for view button
-                         Navigator.push( context,MaterialPageRoute(builder: (context) => const CertificatesPage()),);
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => const CertificatesPage()),
+                        );
                       },
                       child: Container(
                         padding: const EdgeInsets.symmetric(
@@ -110,8 +120,8 @@ class ViewCoachProfilePage extends StatelessWidget {
                           horizontal: 16,
                         ),
                         decoration: BoxDecoration(
-                        color: const Color.fromARGB(255, 44, 184, 249),
-                        borderRadius: BorderRadius.circular(15),
+                          color: const Color.fromARGB(255, 94, 204, 255),
+                          borderRadius: BorderRadius.circular(15),
                         ),
                         child: const Text(
                           'View',
@@ -154,8 +164,10 @@ class ViewCoachProfilePage extends StatelessWidget {
                     ),
                     GestureDetector(
                       onTap: () {
-                        // Add functionality for view button
-                        Navigator.push(context,MaterialPageRoute(builder: (context) => const ExperiencesPage()),);
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => const ExperiencesPage()),
+                        );
                       },
                       child: Container(
                         padding: const EdgeInsets.symmetric(
@@ -163,8 +175,8 @@ class ViewCoachProfilePage extends StatelessWidget {
                           horizontal: 16,
                         ),
                         decoration: BoxDecoration(
-                        color: const Color.fromARGB(255, 44, 184, 249),
-                        borderRadius: BorderRadius.circular(15),
+                          color: const Color.fromARGB(255, 94, 204, 255),
+                          borderRadius: BorderRadius.circular(15),
                         ),
                         child: const Text(
                           'View',
@@ -231,8 +243,7 @@ class ViewCoachProfilePage extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   InkWell(
-                    onTap: () {
-                    },
+                    onTap: () {},
                     child: Container(
                       height: 130,
                       width: 170,
@@ -251,8 +262,7 @@ class ViewCoachProfilePage extends StatelessWidget {
                     ),
                   ),
                   InkWell(
-                    onTap: () {
-                    },
+                    onTap: () {},
                     child: Container(
                       height: 130,
                       width: 170,
@@ -277,14 +287,13 @@ class ViewCoachProfilePage extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   InkWell(
-                    onTap: () {
-                    },
+                    onTap: () {},
                     child: Container(
                       height: 40,
                       width: 150,
                       decoration: BoxDecoration(
-                      color: const Color.fromARGB(255, 44, 184, 249),
-                      borderRadius: BorderRadius.circular(10),
+                        color: const Color.fromARGB(255, 94, 204, 255),
+                        borderRadius: BorderRadius.circular(10),
                       ),
                       child: const Center(
                         child: Text(
@@ -299,8 +308,13 @@ class ViewCoachProfilePage extends StatelessWidget {
                   ),
                   InkWell(
                     onTap: () {
-                    Navigator.push(
-                    context,MaterialPageRoute(builder: (context) => const ChatPage()),);  
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => ChatPage(
+                          coachName: coachName,
+                          coachImageUrl: coachImage,
+                        )),
+                      );
                     },
                     child: Container(
                       height: 40,
@@ -326,13 +340,21 @@ class ViewCoachProfilePage extends StatelessWidget {
               InkWell(
                 onTap: () {
                   Navigator.push(
-                    context,MaterialPageRoute(builder: (context) => PaymentPage(coachName: coachName)),
-                    );
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => PaymentPage(
+                        coachName: coachName,
+                        coachSport: coachSport,
+                        coachImage: coachImage,
+                        isLocalImage: isLocalImage,
+                      ),
+                    ),
+                  );
                 },
                 child: Container(
                   height: 60,
                   decoration: BoxDecoration(
-                    color: const Color.fromARGB(255, 44, 184, 249),
+                    color: const Color.fromARGB(255, 94, 204, 255),
                     borderRadius: BorderRadius.circular(10),
                   ),
                   child: const Center(

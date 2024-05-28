@@ -353,7 +353,7 @@ class SportsCoachesPage extends StatelessWidget {
                       if (isCoach) {
                         Navigator.push(
                           context,
-                          MaterialPageRoute(builder: (context) => const CoachProfilePage()),
+                          MaterialPageRoute(builder: (context) => const CoachProfilePage(userDetails: {},)),
                         );
                       } else {
                         Navigator.push(

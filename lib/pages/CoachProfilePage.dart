@@ -4,7 +4,7 @@ import 'package:firebase_database/firebase_database.dart';
 import 'package:intl/intl.dart';
 
 class CoachProfilePage extends StatefulWidget {
-  const CoachProfilePage({super.key});
+  const CoachProfilePage({super.key, required Map<String, dynamic> userDetails});
 
   @override
   _CoachProfilePageState createState() => _CoachProfilePageState();
@@ -182,7 +182,7 @@ class _CoachProfilePageState extends State<CoachProfilePage> {
                   ),
                   const SizedBox(height: 10),
                   const Text(
-                    'Special needs professional coach,\nwith international certificates,\nbe a champ with me',
+                    'Special needs professional coach,\nwith international certificates,\nBecome a Champ with me!',
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       color: Color.fromARGB(255, 138, 138, 138),
@@ -315,7 +315,7 @@ class _CoachProfilePageState extends State<CoachProfilePage> {
                       style: TextStyle(color: Colors.black),
                     ),
                     Text(
-                      'years of',
+                      'Years of Experience',
                       style: TextStyle(color: Colors.grey),
                     ),
                   ],

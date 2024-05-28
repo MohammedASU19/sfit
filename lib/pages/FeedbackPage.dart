@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:sfit/pages/Homepage.dart';
+
 class FeedbackPage extends StatefulWidget {
   final String coachName;
 
@@ -16,7 +17,7 @@ class _FeedbackPageState extends State<FeedbackPage> {
   String feedback = '';
 
   final databaseReference = FirebaseDatabase.instance.reference();
-  final user = FirebaseAuth.instance.currentUser;
+  final User? user = FirebaseAuth.instance.currentUser;
 
   @override
   Widget build(BuildContext context) {
@@ -112,19 +113,36 @@ class _FeedbackPageState extends State<FeedbackPage> {
               ElevatedButton(
                 onPressed: () async {
                   if (user != null) {
-                    String? username = user?.displayName;
-                    String? email = user?.email;
-                    await databaseReference.child("Feedback").push().set({
-                      'Stars Rating': selectedStars,
-                      'Feedback message': feedback,
-                      'Trainee Username': username,
-                      'Trainee Email': email,
-                      'Coach name': widget.coachName,
-                    });
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => const SportsCoachesPage(userDetails: {},)),
-                    );
+                    String username = user!.displayName ?? 'Anonymous';
+                    String email = user!.email ?? 'No email';
+
+                    try {
+                      await databaseReference.child("Feedback").push().set({
+                        'Stars Rating': selectedStars,
+                        'Feedback message': feedback,
+                        'Trainee Username': username,
+                        'Trainee Email': email,
+                        'Coach name': widget.coachName,
+                      });
+
+                      // Fetch user details
+                      DatabaseReference userRef = FirebaseDatabase.instance.reference().child('trainees').child(user!.uid);
+                      DataSnapshot snapshot = await userRef.get();
+                      Map<String, dynamic> userDetails = {};
+                      if (snapshot.value != null) {
+                        userDetails = Map<String, dynamic>.from(snapshot.value as Map<dynamic, dynamic>);
+                      }
+
+                      if (mounted) {
+                        Navigator.pushReplacement(
+                          context,
+                          MaterialPageRoute(builder: (context) => SportsCoachesPage(userDetails: userDetails)),
+                        );
+                      }
+                    } catch (e) {
+                      print("Error saving feedback: $e");
+                      // Optionally, show an error message to the user
+                    }
                   }
                 },
                 style: ElevatedButton.styleFrom(

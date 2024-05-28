@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:sfit/pages/SubscriptionPage.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:sfit/pages/LoginPage.dart';
+import 'package:sfit/pages/Sessions.dart';
 
 class MyDrawer extends StatelessWidget {
   final Map<String, dynamic>? userDetails;
@@ -75,6 +76,7 @@ class MyDrawer extends StatelessWidget {
             title: const Text('Sessions'),
             onTap: () {
               // Handle Sessions tap
+               Navigator.push(context, MaterialPageRoute(builder: (context) => Sessions()));
             },
           ),
           ListTile(

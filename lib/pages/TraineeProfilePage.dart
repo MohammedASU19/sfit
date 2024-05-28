@@ -3,6 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:sfit/pages/FavoriteCoachesListPage.dart';
 import 'package:sfit/pages/Homepage.dart';
+import 'package:sfit/pages/Sessions.dart';
 
 class TraineeProfilePage extends StatefulWidget {
   const TraineeProfilePage({super.key});
@@ -171,7 +172,12 @@ class _TraineeProfilePageState extends State<TraineeProfilePage> {
                     // Other Sections (My Sessions, Notifications, Get Help, About App)
                     GestureDetector(
                       onTap: () {
-                        // Add functionality for My Sessions
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => Sessions(),
+                          ),
+                        );
                       },
                       child: Container(
                         height: 80,

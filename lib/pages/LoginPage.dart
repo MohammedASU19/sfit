@@ -4,6 +4,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:sfit/pages/HomePage.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:sfit/pages/ChooseRolePage.dart';
+import 'package:sfit/pages/CoachProfilePage.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -38,13 +39,24 @@ class _LoginPageState extends State<LoginPage> {
         }
 
         if (snapshot.exists) {
+          // Convert LinkedHashMap to Map<String, dynamic>
           Map<String, dynamic> userDetails = Map<String, dynamic>.from(snapshot.value as Map);
-          Navigator.pushReplacement(
-            context,
-            MaterialPageRoute(
-              builder: (context) => SportsCoachesPage(userDetails: userDetails),
-            ),
-          );
+          
+          if (userRef.path.contains('trainees')) {
+            Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(
+                builder: (context) => SportsCoachesPage(userDetails: userDetails),
+              ),
+            );
+          } else {
+            Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(
+                builder: (context) => CoachProfilePage(userDetails: userDetails),
+              ),
+            );
+          }
         } else {
           print('User details not found for UID: $uid');
           ScaffoldMessenger.of(context).showSnackBar(

@@ -1,21 +1,28 @@
 import 'package:flutter/material.dart';
-import 'package:sfit/pages/TraineeSignUpPage.dart';
-// void main() {
-//   runApp(SportsConnectApp());
-// }
 
-// class SportsConnectApp extends StatelessWidget {
-//   @override
-//   Widget build(BuildContext context) {
-//     return MaterialApp(
-//       debugShowCheckedModeBanner: false,
-//       home: ChooseDisabilityPage(),
-//     );
-//   }
-// }
-
-class ChooseDisabilityPage extends StatelessWidget {
+class ChooseDisabilityPage extends StatefulWidget {
   const ChooseDisabilityPage({super.key});
+
+  @override
+  _ChooseDisabilityPageState createState() => _ChooseDisabilityPageState();
+}
+
+class _ChooseDisabilityPageState extends State<ChooseDisabilityPage> {
+  final TextEditingController _uniqueAbilityController = TextEditingController();
+
+  InputDecoration _inputDecoration(String hintText) {
+    return InputDecoration(
+      hintText: hintText,
+      hintStyle: const TextStyle(color: Colors.grey),
+      filled: true,
+      fillColor: Colors.grey[200],
+      border: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(8.0),
+        borderSide: BorderSide.none,
+      ),
+      contentPadding: const EdgeInsets.symmetric(vertical: 15.0, horizontal: 20.0),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -30,33 +37,21 @@ class ChooseDisabilityPage extends StatelessWidget {
           },
         ),
         title: const Text(
-          "SportsConnect",
+          "Spark Fitness",
           style: TextStyle(
             color: Colors.black,
             fontWeight: FontWeight.bold,
           ),
         ),
-        actions: <Widget>[
-          IconButton(
-            icon: const Icon(Icons.settings, color: Colors.black),
-            onPressed: () {
-              // Add your settings functionality here
-            },
-          ),
-        ],
       ),
       body: Padding(
         padding: const EdgeInsets.all(20.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
-            const Text(
-              "Choose what you have",
-              style: TextStyle(
-                fontSize: 24,
-                fontWeight: FontWeight.bold,
-                color: Colors.black,
-              ),
+            TextFormField(
+              controller: _uniqueAbilityController,
+              decoration: _inputDecoration('Not listed? Type your Unique ability here!'),
             ),
             const SizedBox(height: 20),
             const Divider(color: Colors.grey),
@@ -85,8 +80,10 @@ class ChooseDisabilityPage extends StatelessWidget {
                 height: 40,
                 child: ElevatedButton(
                   onPressed: () {
-                    // Add your next button functionality here
-                    Navigator.push(context,MaterialPageRoute(builder: (context) => const SignUpPage()));
+                    String? selectedAbility = _uniqueAbilityController.text.isNotEmpty
+                        ? _uniqueAbilityController.text
+                        : null;
+                    Navigator.pop(context, selectedAbility);
                   },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.blue,
@@ -113,7 +110,7 @@ class ChooseDisabilityPage extends StatelessWidget {
       color: Colors.grey[300],
       child: InkWell(
         onTap: () {
-          // Add your card tap functionality here
+          Navigator.pop(context, text); // Return selected disability
         },
         child: Center(
           child: Column(

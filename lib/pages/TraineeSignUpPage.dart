@@ -6,6 +6,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 import 'package:sfit/pages/GuardianSetup.dart';
+import 'package:sfit/pages/ChooseDisabilityPage.dart';
 
 class SignUpPage extends StatelessWidget {
   const SignUpPage({super.key});
@@ -51,6 +52,7 @@ class _SignUpFormState extends State<SignUpForm> {
   bool _guardianForTrainees = false;
   bool _obscurePassword = true;
   List<Map<String, dynamic>> _juniorTrainees = [];
+  String? _uniqueAbility;
 
   InputDecoration _inputDecoration(String hintText) {
     return InputDecoration(
@@ -331,7 +333,20 @@ class _SignUpFormState extends State<SignUpForm> {
             CheckboxListTile(
               title: const Text('Individual with unique abilities'),
               value: _individualWithUniqueAbilities,
-              onChanged: (newValue) {
+              onChanged: (newValue) async {
+                if (newValue == true) {
+                  final result = await Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const ChooseDisabilityPage(),
+                    ),
+                  );
+                  if (result != null) {
+                    setState(() {
+                      _uniqueAbility = result;
+                    });
+                  }
+                }
                 setState(() {
                   _individualWithUniqueAbilities = newValue!;
                 });
@@ -435,6 +450,7 @@ class _SignUpFormState extends State<SignUpForm> {
           'username': _username,
           'password': _password,
           'individualWithUniqueAbilities': _individualWithUniqueAbilities,
+          'uniqueAbility': _uniqueAbility, 
           'guardianForTrainees': _guardianForTrainees,
           'profileImageUrl': _imageUrl,
           'juniorTrainees': _juniorTrainees,
