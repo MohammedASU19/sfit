@@ -1,9 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:sfit/pages/SearchCoachPage.dart';
+import 'package:sfit/pages/Homepage.dart';
+import 'package:sfit/pages/TraineeProfilePage.dart';
 
-class FavoriteCoaches extends StatelessWidget {
-  FavoriteCoaches({Key? key, required this.title}) : super(key: key);
+class FavoriteCoaches extends StatefulWidget {
+  const FavoriteCoaches({Key? key, required this.title}) : super(key: key);
   final String title;
 
+  @override
+  _FavoriteCoachesState createState() => _FavoriteCoachesState();
+}
+
+class _FavoriteCoachesState extends State<FavoriteCoaches> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -17,11 +25,11 @@ class FavoriteCoaches extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Text(
-                this.title,
-                style: TextStyle(fontWeight: FontWeight.bold),
+                widget.title,
+                style: const TextStyle(fontWeight: FontWeight.bold),
               ),
-              Spacer(),
-              Icon(Icons.notifications, color: Colors.black),
+              const Spacer(),
+              const Icon(Icons.notifications, color: Colors.black),
             ],
           ),
         ),
@@ -32,29 +40,40 @@ class FavoriteCoaches extends StatelessWidget {
           Container(
             height: 1,
             color: Colors.grey[300],
-            margin: EdgeInsets.symmetric(vertical: 10),
+            margin: const EdgeInsets.symmetric(vertical: 10),
           ),
-
-          InkWell(
-            onTap: () {
-              _showCoachDetails(context, 'Sarah Johnson', 'Basketball',
-                  'https://media.istockphoto.com/id/174861321/photo/female-basketball-coach.jpg?s=612x612&w=0&k=20&c=n8rFmHnlaMXeP72_pxElkkIpAyWd6-AwVPS8P4HaeUA=');
-            },
-            child: _buildCoachCard(
-              'https://media.istockphoto.com/id/174861321/photo/female-basketball-coach.jpg?s=612x612&w=0&k=20&c=n8rFmHnlaMXeP72_pxElkkIpAyWd6-AwVPS8P4HaeUA=',
-              'Sarah Johnson',
-              'Basketball',
-            ),
-          ),
-          InkWell(
-            onTap: () {
-              _showCoachDetails(context, 'Alex Rodriguez', 'Baseball',
-                  'https://img.mlbstatic.com/mlb-images/image/private/t_16x9/t_w1024/mlb/dqh0gzojb56za0dqwsue');
-            },
-            child: _buildCoachCard(
-              'https://img.mlbstatic.com/mlb-images/image/private/t_16x9/t_w1024/mlb/dqh0gzojb56za0dqwsue',
-              'Alex Rodriguez',
-              'Baseball',
+          Expanded(
+            child: ListView.builder(
+              itemCount: favoriteCoaches.length,
+              itemBuilder: (context, index) {
+                final coach = favoriteCoaches[index];
+                return InkWell(
+                  onTap: () {
+                    _showCoachDetails(
+                      context,
+                      coach.name,
+                      coach.sport,
+                      coach.image,
+                      coach.isLocal,
+                      coach.age,
+                      coach.coachingHours,
+                    );
+                  },
+                  child: _buildCoachCard(
+                    coach.image,
+                    coach.name,
+                    coach.sport,
+                    coach.isLocal,
+                    coach.age,
+                    coach.coachingHours,
+                    () {
+                      setState(() {
+                        favoriteCoaches.removeAt(index);
+                      });
+                    },
+                  ),
+                );
+              },
             ),
           ),
         ],
@@ -66,21 +85,54 @@ class FavoriteCoaches extends StatelessWidget {
         unselectedItemColor: Colors.black,
         showSelectedLabels: false, // Hide the labels
         showUnselectedLabels: false, // Hide the labels
-        items: const <BottomNavigationBarItem>[
+        items: [
           BottomNavigationBarItem(
-            icon: Icon(Icons.home),
+            backgroundColor: Colors.white,
+            icon: IconButton(
+              icon: const Icon(Icons.home),
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const SportsCoachesPage(userDetails: {})),
+                );
+              },
+            ),
             label: 'Home',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.search),
+            backgroundColor: Colors.white,
+            icon: IconButton(
+              icon: const Icon(Icons.search),
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const SearchCoachesPage()),
+                );
+              },
+            ),
             label: 'Search',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.favorite),
+            backgroundColor: Colors.white,
+            icon: IconButton(
+              icon: const Icon(Icons.favorite, color: Color.fromARGB(255, 94, 204, 255)),
+              onPressed: () {
+                // Do nothing as we are already on the Favorites page
+              },
+            ),
             label: 'Favorites',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.person),
+            backgroundColor: Colors.white,
+            icon: IconButton(
+              icon: const Icon(Icons.person),
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const TraineeProfilePage()),
+                );
+              },
+            ),
             label: 'Profile',
           ),
         ],
@@ -88,36 +140,60 @@ class FavoriteCoaches extends StatelessWidget {
     );
   }
 
-  Widget _buildCoachCard(String imageUrl, String name, String sport) {
+  Widget _buildCoachCard(String imageUrl, String name, String sport, bool isLocal, int age, String coachingHours, VoidCallback onDelete) {
     return Container(
       width: 410, // Set width
-      height: 100, // Set height 
-      padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8), // Add padding
+      height: 150, // Adjust height to accommodate new fields
+      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8), // Add padding
       child: Card(
         color: Colors.grey[200], // Set the card background color to grey
         child: ListTile(
           leading: ClipRRect(
             borderRadius: BorderRadius.circular(20), // Adjust border radius as needed
-            child: Image.network(
-              imageUrl,
-              width: 70, // Set image width
-              height: 70, // Set image height
-              fit: BoxFit.cover, // Adjust how the image fits into the space
-            ),
+            child: isLocal
+                ? Image.asset(
+                    imageUrl,
+                    width: 70, // Set image width
+                    height: 70, // Set image height
+                    fit: BoxFit.cover, // Adjust how the image fits into the space
+                  )
+                : Image.network(
+                    imageUrl,
+                    width: 70, // Set image width
+                    height: 70, // Set image height
+                    fit: BoxFit.cover, // Adjust how the image fits into the space
+                    errorBuilder: (BuildContext context, Object exception, StackTrace? stackTrace) {
+                      return Image.network(
+                        'https://via.placeholder.com/70', // Placeholder image URL
+                        width: 70, // Set image width
+                        height: 70, // Set image height
+                        fit: BoxFit.cover, // Adjust how the image fits into the space
+                      );
+                    },
+                  ),
           ),
           title: Text(
             name,
-            style: TextStyle(fontWeight: FontWeight.bold), // Make the name bold
+            style: const TextStyle(fontWeight: FontWeight.bold), // Make the name bold
           ),
-          subtitle: Text(sport),
-          trailing: Icon(Icons.delete_forever),
+          subtitle: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text('Sport: $sport'),
+              Text('Age: $age'),
+              Text('Hours: $coachingHours'),
+            ],
+          ),
+          trailing: IconButton(
+            icon: const Icon(Icons.delete_forever),
+            onPressed: onDelete,
+          ),
         ),
       ),
     );
   }
 
-  void _showCoachDetails(BuildContext context, String name, String sport,
-      String imageUrl) {
+  void _showCoachDetails(BuildContext context, String name, String sport, String imageUrl, bool isLocal, int age, String coachingHours) {
     showDialog(
       context: context,
       builder: (BuildContext context) {
@@ -130,13 +206,13 @@ class FavoriteCoaches extends StatelessWidget {
           child: Stack(
             children: <Widget>[
               Container(
-                padding: EdgeInsets.all(20),
-                margin: EdgeInsets.only(top: 20),
+                padding: const EdgeInsets.all(20),
+                margin: const EdgeInsets.only(top: 20),
                 decoration: BoxDecoration(
                   shape: BoxShape.rectangle,
                   color: Colors.white,
                   borderRadius: BorderRadius.circular(20),
-                  boxShadow: [
+                  boxShadow: const [
                     BoxShadow(
                       color: Colors.black,
                       offset: Offset(0, 10),
@@ -147,39 +223,45 @@ class FavoriteCoaches extends StatelessWidget {
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   children: <Widget>[
-                    Text(
+                    const Text(
                       'Coach Details',
                       style: TextStyle(
                         fontSize: 24,
                         fontWeight: FontWeight.w700,
                       ),
                     ),
-                    SizedBox(height: 20),
+                    const SizedBox(height: 20),
                     CircleAvatar(
-                      backgroundImage: NetworkImage(imageUrl),
+                      backgroundImage: isLocal
+                          ? AssetImage(imageUrl)
+                          : NetworkImage(imageUrl) as ImageProvider,
                       radius: 50,
                     ),
-                    SizedBox(height: 20),
+                    const SizedBox(height: 20),
                     Text(
-                      'Name: $name',
-                      style: TextStyle(
+                      'Coach Name: $name',
+                      style: const TextStyle(
                         fontSize: 16,
                       ),
                     ),
-                    SizedBox(height: 10),
+                    const SizedBox(height: 10),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Text(
-                          'Sport: $sport',
-                          style: TextStyle(
+                          'Sport Coaching: $sport',
+                          style: const TextStyle(
                             fontSize: 16,
                           ),
                         ),
-                        SizedBox(width: 10),
+                        const SizedBox(width: 10),
                         _getSportIcon(sport),
                       ],
                     ),
+                    const SizedBox(height: 10),
+                    Text('Age: $age'),
+                    const SizedBox(height: 10),
+                    Text('Hours: $coachingHours'),
                   ],
                 ),
               ),
@@ -190,7 +272,7 @@ class FavoriteCoaches extends StatelessWidget {
                   onTap: () {
                     Navigator.of(context).pop();
                   },
-                  child: CircleAvatar(
+                  child: const CircleAvatar(
                     backgroundColor: Colors.red,
                     radius: 15,
                     child: Icon(
@@ -210,11 +292,15 @@ class FavoriteCoaches extends StatelessWidget {
   Widget _getSportIcon(String sport) {
     switch (sport.toLowerCase()) {
       case 'basketball':
-        return Icon(Icons.sports_basketball);
+        return const Icon(Icons.sports_basketball);
       case 'baseball':
-        return Icon(Icons.sports_baseball);
+        return const Icon(Icons.sports_baseball);
+      case 'body fitness':
+        return const Icon(Icons.fitness_center);
+      case 'badminton':
+        return const Icon(Icons.sports_tennis);
       default:
-        return Icon(Icons.sports);
+        return const Icon(Icons.sports);
     }
   }
 }

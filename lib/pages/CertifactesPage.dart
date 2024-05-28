@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
 class CertificatesPage extends StatelessWidget {
+  const CertificatesPage({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -8,18 +10,18 @@ class CertificatesPage extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: Colors.white, // Set background color of the app bar to white
         leading: IconButton(
-          icon: Icon(Icons.arrow_back, color: Colors.black), // Set back arrow color to black
+          icon: const Icon(Icons.arrow_back, color: Colors.black), // Set back arrow color to black
           onPressed: () {
             Navigator.pop(context);
           },
         ),
-        title: Text(
+        title: const Text(
           'Coach Certificates',
           style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold), // Set text color to black and bold
         ),
         centerTitle: true,
       ),
-      body: Center(
+      body: const Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
@@ -53,7 +55,7 @@ class CertificateCard extends StatelessWidget {
   final String title;
   final String certificationType;
 
-  const CertificateCard({
+  const CertificateCard({super.key, 
     required this.imageUrl,
     required this.title,
     required this.certificationType,
@@ -63,7 +65,7 @@ class CertificateCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Card(
       elevation: 4,
-      margin: EdgeInsets.symmetric(horizontal: 20),
+      margin: const EdgeInsets.symmetric(horizontal: 20),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -80,9 +82,9 @@ class CertificateCard extends StatelessWidget {
               children: [
                 Text(
                   title,
-                  style: TextStyle(fontWeight: FontWeight.bold),
+                  style: const TextStyle(fontWeight: FontWeight.bold),
                 ),
-                SizedBox(height: 4),
+                const SizedBox(height: 4),
                 Text(certificationType),
               ],
             ),

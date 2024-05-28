@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:sfit/pages/ChooseRolePage.dart';
 
 class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -9,12 +11,14 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: WelcomePage(),
+      home: const WelcomePage(),
     );
   }
 }
 
 class WelcomePage extends StatelessWidget {
+  const WelcomePage({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -23,39 +27,47 @@ class WelcomePage extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Spacer(),
-            Text(
+            const Spacer(),
+            const Text(
               'Welcome to',
               style: TextStyle(
                 fontSize: 30,
                 fontWeight: FontWeight.w500,
               ),
             ),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             Image.asset(
               'lib/images/SFIT_logo.png',
               height: 210,
               width: 210,
             ),
-            SizedBox(height: 10),
-            Text(
+            const SizedBox(height: 10),
+            const Text(
               'SFIT',
               style: TextStyle(
                 fontSize: 24,
                 fontWeight: FontWeight.bold,
               ),
             ),
-            Spacer(),
+            const Spacer(),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20.0),
               child: ElevatedButton(
                 onPressed: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => ChooseRolePage()),
+                    MaterialPageRoute(builder: (context) => const ChooseRolePage()),
                   );
                 },
-                child: Text(
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: const Color.fromARGB(255, 94, 204, 255),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(20),
+                  ),
+                  minimumSize: const Size(double.infinity, 50),
+                  padding: const EdgeInsets.symmetric(vertical: 15),
+                ),
+                child: const Text(
                   'Get Started',
                   style: TextStyle(
                     fontSize: 18,
@@ -63,17 +75,9 @@ class WelcomePage extends StatelessWidget {
                     color: Colors.black,
                   ),
                 ),
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: const Color.fromARGB(255, 94, 204, 255),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(20),
-                  ),
-                  minimumSize: Size(double.infinity, 50),
-                  padding: EdgeInsets.symmetric(vertical: 15),
-                ),
               ),
             ),
-            SizedBox(height: 50),
+            const SizedBox(height: 50),
           ],
         ),
       ),

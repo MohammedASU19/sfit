@@ -6,12 +6,12 @@ import 'package:sfit/pages/LoginPage.dart';
 class MyDrawer extends StatelessWidget {
   final Map<String, dynamic>? userDetails;
 
-  MyDrawer({required this.userDetails});
+  const MyDrawer({super.key, required this.userDetails});
 
   @override
   Widget build(BuildContext context) {
     if (userDetails == null) {
-      return Center(child: CircularProgressIndicator());
+      return const Center(child: CircularProgressIndicator());
     }
 
     String username = userDetails!['username'] ?? 'Username';
@@ -23,31 +23,31 @@ class MyDrawer extends StatelessWidget {
         padding: EdgeInsets.zero,
         children: <Widget>[
           DrawerHeader(
-            decoration: BoxDecoration(
+            decoration: const BoxDecoration(
               color: Colors.white,
             ),
             child: Row(
               children: [
                 IconButton(
-                  icon: Icon(Icons.arrow_back),
+                  icon: const Icon(Icons.arrow_back),
                   onPressed: () {
                     Navigator.pop(context);
                   },
                 ),
-                SizedBox(width: 20.0),
+                const SizedBox(width: 20.0),
                 CircleAvatar(
                   radius: 30.0,
                   backgroundImage: profileImageUrl != null ? NetworkImage(profileImageUrl) : null,
                   backgroundColor: Colors.blue,
                   child: profileImageUrl == null
-                      ? Icon(
+                      ? const Icon(
                           Icons.account_circle,
                           size: 50.0,
                           color: Colors.white,
                         )
                       : null,
                 ),
-                SizedBox(width: 20.0),
+                const SizedBox(width: 20.0),
                 Expanded(
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -55,10 +55,10 @@ class MyDrawer extends StatelessWidget {
                     children: [
                       Text(
                         username,
-                        style: TextStyle(fontSize: 20.0),
+                        style: const TextStyle(fontSize: 20.0),
                         overflow: TextOverflow.ellipsis, // Ensures text does not overflow
                       ),
-                      SizedBox(height: 5.0),
+                      const SizedBox(height: 5.0),
                       Container(
                         height: 1.0,
                         width: double.infinity,
@@ -71,49 +71,49 @@ class MyDrawer extends StatelessWidget {
             ),
           ),
           ListTile(
-            leading: Icon(Icons.sports_gymnastics_rounded),
-            title: Text('Sessions'),
+            leading: const Icon(Icons.sports_gymnastics_rounded),
+            title: const Text('Sessions'),
             onTap: () {
               // Handle Sessions tap
             },
           ),
           ListTile(
-            leading: Icon(Icons.sports_kabaddi_rounded),
-            title: Text('Coaches'),
+            leading: const Icon(Icons.sports_kabaddi_rounded),
+            title: const Text('Coaches'),
             onTap: () {
               // Handle Coaches tap
             },
           ),
           ListTile(
-            leading: Icon(Icons.card_membership_rounded),
-            title: Text('Plans'),
+            leading: const Icon(Icons.card_membership_rounded),
+            title: const Text('Plans'),
             onTap: () {
-              Navigator.push(context, MaterialPageRoute(builder: (context) => SubscriptionPage()));
+              Navigator.push(context, MaterialPageRoute(builder: (context) => const SubscriptionPage()));
               // Handle Plans tap
             },
           ),
           ListTile(
-            leading: Icon(Icons.credit_card_rounded),
-            title: Text('Subscriptions'),
+            leading: const Icon(Icons.credit_card_rounded),
+            title: const Text('Subscriptions'),
             onTap: () {
               // Handle Subscriptions tap
             },
           ),
           ListTile(
-            leading: Icon(Icons.calendar_month_sharp),
-            title: Text('Schedule'),
+            leading: const Icon(Icons.calendar_month_sharp),
+            title: const Text('Schedule'),
             onTap: () {
               // Handle Schedule tap
             },
           ),
-          Divider(),
+          const Divider(),
           ListTile(
-            leading: Icon(Icons.exit_to_app),
-            title: Text('Sign out'),
+            leading: const Icon(Icons.exit_to_app),
+            title: const Text('Sign out'),
             onTap: () async {
               try {
                 await FirebaseAuth.instance.signOut();
-                Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => LoginPage()));
+                Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const LoginPage()));
               } catch (e) {
                 print('Error signing out: $e');
               }

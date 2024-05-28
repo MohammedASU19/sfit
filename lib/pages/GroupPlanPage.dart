@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 
 void main() {
-  runApp(MaterialApp(
+  runApp(const MaterialApp(
     home: GroupPlanPage(),
   ));
 }
 
 class GroupPlanPage extends StatelessWidget {
+  const GroupPlanPage({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -15,7 +17,7 @@ class GroupPlanPage extends StatelessWidget {
         backgroundColor: Colors.white,
         elevation: 0,
         leading: IconButton(
-          icon: Icon(Icons.arrow_back, color: Colors.black),
+          icon: const Icon(Icons.arrow_back, color: Colors.black),
           onPressed: () {
             Navigator.pop(context);
           },
@@ -32,7 +34,7 @@ class GroupPlanPage extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            PlanDetailsCard(
+            const PlanDetailsCard(
               title: 'Group Plan Details',
               details: [
                 'Plan Name: Premium Fitness',
@@ -51,23 +53,23 @@ class GroupPlanPage extends StatelessWidget {
                 '9 friends',
               ],
             ),
-            PlanDetailsCard(
+            const PlanDetailsCard(
               title: 'Serial Code Sharing',
               details: [
                 'Your Serial Code: ABCDEF123',
               ],
               hasButton: true,
             ),
-            SizedBox(height: 20.0),
+            const SizedBox(height: 20.0),
             Center(
               child: ElevatedButton(
                 onPressed: () {},
-                child: Text('Subscribe Now'),
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.lightBlue,
-                  textStyle: TextStyle(fontSize: 20.0, color: Colors.white),
-                  minimumSize: Size(300.0, 50.0),
+                  textStyle: const TextStyle(fontSize: 20.0, color: Colors.white),
+                  minimumSize: const Size(300.0, 50.0),
                 ),
+                child: const Text('Subscribe Now'),
               ),
             ),
           ],
@@ -79,19 +81,19 @@ class GroupPlanPage extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
             IconButton(
-              icon: Icon(Icons.home, color: Colors.lightBlue),
+              icon: const Icon(Icons.home, color: Colors.lightBlue),
               onPressed: () {},
             ),
             IconButton(
-              icon: Icon(Icons.search, color: Colors.black),
+              icon: const Icon(Icons.search, color: Colors.black),
               onPressed: () {},
             ),
             IconButton(
-              icon: Icon(Icons.favorite, color: Colors.black),
+              icon: const Icon(Icons.favorite, color: Colors.black),
               onPressed: () {},
             ),
             IconButton(
-              icon: Icon(Icons.account_circle, color: Colors.black),
+              icon: const Icon(Icons.account_circle, color: Colors.black),
               onPressed: () {},
             ),
           ],
@@ -107,7 +109,7 @@ class PlanDetailsCard extends StatelessWidget {
   final List<String>? dropdownItems;
   final bool hasButton;
 
-  const PlanDetailsCard({
+  const PlanDetailsCard({super.key, 
     required this.title,
     required this.details,
     this.dropdownItems,
@@ -117,8 +119,8 @@ class PlanDetailsCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.all(20.0),
-      padding: EdgeInsets.all(20.0),
+      margin: const EdgeInsets.all(20.0),
+      padding: const EdgeInsets.all(20.0),
       decoration: BoxDecoration(
         color: Colors.grey[200],
         borderRadius: BorderRadius.circular(10.0),
@@ -128,42 +130,42 @@ class PlanDetailsCard extends StatelessWidget {
         children: [
           Text(
             title,
-            style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold, color: Colors.black),
+            style: const TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold, color: Colors.black),
           ),
-          SizedBox(height: 10.0),
+          const SizedBox(height: 10.0),
           for (String detail in details)
             detail.contains(':')
-                ? Text(detail, style: TextStyle(fontSize: 16, color: Colors.black))
-                : SizedBox.shrink(),
+                ? Text(detail, style: const TextStyle(fontSize: 16, color: Colors.black))
+                : const SizedBox.shrink(),
           if (dropdownItems != null) ...[
-            SizedBox(height: 10.0),
+            const SizedBox(height: 10.0),
             DropdownButton<String>(
               items: dropdownItems!
                   .map(
                     (item) => DropdownMenuItem<String>(
-                      child: Text(item),
                       value: item,
+                      child: Text(item),
                     ),
                   )
                   .toList(),
               onChanged: (value) {},
-              hint: Text('Select number of friends'),
+              hint: const Text('Select number of friends'),
             ),
           ],
           if (hasButton)
-            SizedBox(height: 10.0),
+            const SizedBox(height: 10.0),
           if (hasButton)
             Center(
               child: ElevatedButton(
                 onPressed: () {},
-                child: Text('Copy Code', style: TextStyle(fontSize: 16, color: Colors.white)),
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.lightBlue,
-                  padding: EdgeInsets.symmetric(horizontal: 50, vertical: 15),
+                  padding: const EdgeInsets.symmetric(horizontal: 50, vertical: 15),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(10.0),
                   ),
                 ),
+                child: const Text('Copy Code', style: TextStyle(fontSize: 16, color: Colors.white)),
               ),
             ),
         ],

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:sfit/pages/SearchCoachPage.dart';
 class FilterPage extends StatefulWidget {
+  const FilterPage({super.key});
+
   @override
   _FilterPageState createState() => _FilterPageState();
 }
@@ -14,16 +16,16 @@ class _FilterPageState extends State<FilterPage> {
     return Scaffold(
       backgroundColor: Colors.white, // Set entire page background color to white
       appBar: PreferredSize(
-        preferredSize: Size.fromHeight(56), // Default height of AppBar
+        preferredSize: const Size.fromHeight(56), // Default height of AppBar
         child: AppBar(
           backgroundColor: Colors.white, // Set AppBar background color to white
           leading: IconButton(
-            icon: Icon(Icons.arrow_back),
+            icon: const Icon(Icons.arrow_back),
             onPressed: () {
               Navigator.pop(context); // Navigate back when back arrow is pressed
             },
           ),
-          title: Text(
+          title: const Text(
             "Search",
             style: TextStyle(
               fontSize: 24,
@@ -38,35 +40,35 @@ class _FilterPageState extends State<FilterPage> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text(
+                const Text(
                   "Filter by:",
                   style: TextStyle(
                     fontSize: 18,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
-                SizedBox(width: 20), // Add spacing between Filter by text and options
+                const SizedBox(width: 20), // Add spacing between Filter by text and options
                 Expanded(
                   child: Row(
                     children: [
                       buildFilterOption("Experience"),
-                      SizedBox(width: 10),
+                      const SizedBox(width: 10),
                       buildFilterOption("Available now"),
-                      SizedBox(width: 10),
+                      const SizedBox(width: 10),
                       buildFilterOption("Active"),
-                      SizedBox(width: 10),
+                      const SizedBox(width: 10),
                       buildFilterOption("Highly Rated"),
                     ],
                   ),
                 ),
               ],
             ),
-            SizedBox(height: 20),
-            Text(
+            const SizedBox(height: 20),
+            const Text(
               "Price range",
               style: TextStyle(
                 fontSize: 18,
@@ -74,10 +76,10 @@ class _FilterPageState extends State<FilterPage> {
                 color: Colors.black,
               ),
             ),
-            SizedBox(height: 10),
+            const SizedBox(height: 10),
             Row(
               children: [
-                Text(
+                const Text(
                   "\$10",
                   style: TextStyle(color: Colors.black), // Set price range text color to blue
                 ), // Start of price range
@@ -92,32 +94,32 @@ class _FilterPageState extends State<FilterPage> {
                         priceRange = value;
                       });
                     },
-                    label: priceRange.toStringAsFixed(0) + '\$', // Display price value
+                    label: '${priceRange.toStringAsFixed(0)}\$', // Display price value
                     activeColor: Colors.blue, // Set price range line color to blue
                   ),
                 ),
-                Text(
+                const Text(
                   "\$100",
                   style: TextStyle(color: Colors.black), // Set price range text color to blue
                 ), // End of price range
               ],
             ),
-            Spacer(),
+            const Spacer(),
             Center(
               child: ElevatedButton(
                 onPressed: () {
                   // Add logic to apply filters
                    Navigator.push(
-                    context,MaterialPageRoute(builder: (context) => SearchCoachesPage()));
+                    context,MaterialPageRoute(builder: (context) => const SearchCoachesPage()));
                 },
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.blue,
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(10.0),
                   ),
-                  padding: EdgeInsets.symmetric(horizontal: 120.0, vertical: 16.0),
+                  padding: const EdgeInsets.symmetric(horizontal: 120.0, vertical: 16.0),
                 ),
-                child: Text(
+                child: const Text(
                   "Apply Filters",
                   style: TextStyle(
                     fontSize: 18,
@@ -142,7 +144,7 @@ class _FilterPageState extends State<FilterPage> {
         });
       },
       child: Container(
-        padding: EdgeInsets.all(10),
+        padding: const EdgeInsets.all(10),
         decoration: BoxDecoration(
           color: isSelected ? Colors.blue : Colors.white,
           borderRadius: BorderRadius.circular(10),

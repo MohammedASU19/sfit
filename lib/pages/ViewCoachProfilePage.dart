@@ -9,7 +9,7 @@ class ViewCoachProfilePage extends StatelessWidget {
   final String coachImage;
   final double  coachRating;
 
-  ViewCoachProfilePage({
+  const ViewCoachProfilePage({super.key, 
     required this.coachName,
     required this.coachImage,
     required this.coachRating,
@@ -20,9 +20,9 @@ class ViewCoachProfilePage extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       home: Scaffold(
         appBar: AppBar(
-          title: Text('Profile Page'),
+          title: const Text('Profile Page'),
           leading: IconButton(
-          icon: Icon(Icons.arrow_back),
+          icon: const Icon(Icons.arrow_back),
           onPressed: () {
             Navigator.pop(context);
           },
@@ -37,31 +37,31 @@ class ViewCoachProfilePage extends StatelessWidget {
                 children: [
                   Container(
                     height: 200,
-                    decoration: BoxDecoration(
+                    decoration: const BoxDecoration(
                       image: DecorationImage(
                         image: NetworkImage('https://www.britishparatabletennis.com/cdn/shop/articles/newcoach_1000x.png?v=1623150313'),
                         fit: BoxFit.cover,
                       ),
                     ),
                   ),
-                  CircleAvatar(
+                  const CircleAvatar(
                     radius: 50,
                      backgroundImage: NetworkImage('https://cdn-icons-png.flaticon.com/512/2585/2585583.png'),
                   ),
                 ],
               ),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
               Center(
                 child: Text(
                   coachName, // Use the coachName property here
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontSize: 20,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
               ),
-              SizedBox(height: 10),
-              Center(
+              const SizedBox(height: 10),
+              const Center(
                 child: Text(
                   'Special needs professional coach\nwith international certificates\n,be a champ with me',
                   style: TextStyle(
@@ -71,10 +71,10 @@ class ViewCoachProfilePage extends StatelessWidget {
                   textAlign: TextAlign.center,
                 ),
               ),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
               Container(
-                margin: EdgeInsets.symmetric(horizontal: 20),
-                padding: EdgeInsets.all(10),
+                margin: const EdgeInsets.symmetric(horizontal: 20),
+                padding: const EdgeInsets.all(10),
                 decoration: BoxDecoration(
                   color: Colors.grey[300],
                   borderRadius: BorderRadius.circular(10),
@@ -82,7 +82,7 @@ class ViewCoachProfilePage extends StatelessWidget {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Column(
+                    const Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
@@ -102,10 +102,10 @@ class ViewCoachProfilePage extends StatelessWidget {
                     GestureDetector(
                       onTap: () {
                         // Add functionality for view button
-                         Navigator.push( context,MaterialPageRoute(builder: (context) => CertificatesPage()),);
+                         Navigator.push( context,MaterialPageRoute(builder: (context) => const CertificatesPage()),);
                       },
                       child: Container(
-                        padding: EdgeInsets.symmetric(
+                        padding: const EdgeInsets.symmetric(
                           vertical: 8,
                           horizontal: 16,
                         ),
@@ -113,7 +113,7 @@ class ViewCoachProfilePage extends StatelessWidget {
                         color: const Color.fromARGB(255, 44, 184, 249),
                         borderRadius: BorderRadius.circular(15),
                         ),
-                        child: Text(
+                        child: const Text(
                           'View',
                           style: TextStyle(
                             color: Colors.black,
@@ -124,10 +124,10 @@ class ViewCoachProfilePage extends StatelessWidget {
                   ],
                 ),
               ),
-              SizedBox(height: 10),
+              const SizedBox(height: 10),
               Container(
-                margin: EdgeInsets.symmetric(horizontal: 20),
-                padding: EdgeInsets.all(10),
+                margin: const EdgeInsets.symmetric(horizontal: 20),
+                padding: const EdgeInsets.all(10),
                 decoration: BoxDecoration(
                   color: Colors.grey[300],
                   borderRadius: BorderRadius.circular(10),
@@ -135,7 +135,7 @@ class ViewCoachProfilePage extends StatelessWidget {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Column(
+                    const Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
@@ -155,10 +155,10 @@ class ViewCoachProfilePage extends StatelessWidget {
                     GestureDetector(
                       onTap: () {
                         // Add functionality for view button
-                        Navigator.push(context,MaterialPageRoute(builder: (context) => ExperiencesPage()),);
+                        Navigator.push(context,MaterialPageRoute(builder: (context) => const ExperiencesPage()),);
                       },
                       child: Container(
-                        padding: EdgeInsets.symmetric(
+                        padding: const EdgeInsets.symmetric(
                           vertical: 8,
                           horizontal: 16,
                         ),
@@ -166,7 +166,7 @@ class ViewCoachProfilePage extends StatelessWidget {
                         color: const Color.fromARGB(255, 44, 184, 249),
                         borderRadius: BorderRadius.circular(15),
                         ),
-                        child: Text(
+                        child: const Text(
                           'View',
                           style: TextStyle(
                             color: Colors.black,
@@ -177,7 +177,7 @@ class ViewCoachProfilePage extends StatelessWidget {
                   ],
                 ),
               ),
-              SizedBox(height: 10),
+              const SizedBox(height: 10),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
@@ -188,7 +188,7 @@ class ViewCoachProfilePage extends StatelessWidget {
                       color: Colors.grey[300],
                       borderRadius: BorderRadius.circular(10),
                     ),
-                    child: Center(
+                    child: const Center(
                       child: Text(
                         '\$30 / h',
                         style: TextStyle(
@@ -204,7 +204,7 @@ class ViewCoachProfilePage extends StatelessWidget {
                       color: Colors.grey[300],
                       borderRadius: BorderRadius.circular(10),
                     ),
-                    child: Center(
+                    child: const Center(
                       child: Text(
                         'Location',
                         style: TextStyle(
@@ -215,9 +215,9 @@ class ViewCoachProfilePage extends StatelessWidget {
                   ),
                 ],
               ),
-              SizedBox(height: 10),
-              Padding(
-                padding: const EdgeInsets.all(8.0),
+              const SizedBox(height: 10),
+              const Padding(
+                padding: EdgeInsets.all(8.0),
                 child: Text(
                   'Posts',
                   style: TextStyle(
@@ -226,7 +226,7 @@ class ViewCoachProfilePage extends StatelessWidget {
                   ),
                 ),
               ),
-              SizedBox(height: 10),
+              const SizedBox(height: 10),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
@@ -240,7 +240,7 @@ class ViewCoachProfilePage extends StatelessWidget {
                         color: Colors.grey[300],
                         borderRadius: BorderRadius.circular(10),
                       ),
-                      child: Center(
+                      child: const Center(
                         child: Text(
                           'Add Picture',
                           style: TextStyle(
@@ -260,7 +260,7 @@ class ViewCoachProfilePage extends StatelessWidget {
                         color: Colors.grey[300],
                         borderRadius: BorderRadius.circular(10),
                       ),
-                      child: Center(
+                      child: const Center(
                         child: Text(
                           'Add Picture',
                           style: TextStyle(
@@ -272,7 +272,7 @@ class ViewCoachProfilePage extends StatelessWidget {
                   ),
                 ],
               ),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
@@ -286,7 +286,7 @@ class ViewCoachProfilePage extends StatelessWidget {
                       color: const Color.fromARGB(255, 44, 184, 249),
                       borderRadius: BorderRadius.circular(10),
                       ),
-                      child: Center(
+                      child: const Center(
                         child: Text(
                           'Call Now',
                           style: TextStyle(
@@ -300,7 +300,7 @@ class ViewCoachProfilePage extends StatelessWidget {
                   InkWell(
                     onTap: () {
                     Navigator.push(
-                    context,MaterialPageRoute(builder: (context) => ChatPage()),);  
+                    context,MaterialPageRoute(builder: (context) => const ChatPage()),);  
                     },
                     child: Container(
                       height: 40,
@@ -309,7 +309,7 @@ class ViewCoachProfilePage extends StatelessWidget {
                         color: Colors.grey[300],
                         borderRadius: BorderRadius.circular(10),
                       ),
-                      child: Center(
+                      child: const Center(
                         child: Text(
                           'Message',
                           style: TextStyle(
@@ -322,7 +322,7 @@ class ViewCoachProfilePage extends StatelessWidget {
                   ),
                 ],
               ),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
               InkWell(
                 onTap: () {
                   Navigator.push(
@@ -335,7 +335,7 @@ class ViewCoachProfilePage extends StatelessWidget {
                     color: const Color.fromARGB(255, 44, 184, 249),
                     borderRadius: BorderRadius.circular(10),
                   ),
-                  child: Center(
+                  child: const Center(
                     child: Text(
                       'Book Now',
                       style: TextStyle(
@@ -346,8 +346,8 @@ class ViewCoachProfilePage extends StatelessWidget {
                   ),
                 ),
               ),
-              SizedBox(height: 20),
-              Row(
+              const SizedBox(height: 20),
+              const Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   Icon(Icons.home, size: 30, color: Colors.black),
@@ -356,7 +356,7 @@ class ViewCoachProfilePage extends StatelessWidget {
                   Icon(Icons.person, size: 30, color: Colors.black),
                 ],
               ),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
             ],
           ),
         ),

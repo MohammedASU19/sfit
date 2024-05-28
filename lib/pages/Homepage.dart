@@ -7,10 +7,11 @@ import 'package:sfit/pages/DrawerPage.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:sfit/pages/SportsInterestPage.dart';
+
 class SportsCoachesPage extends StatelessWidget {
   final Map<String, dynamic> userDetails;
 
-  SportsCoachesPage({required this.userDetails});
+  const SportsCoachesPage({super.key, required this.userDetails});
 
   Future<bool> _isCoach() async {
     User? user = FirebaseAuth.instance.currentUser;
@@ -31,7 +32,7 @@ class SportsCoachesPage extends StatelessWidget {
         title: Row(
           children: <Widget>[
             Padding(
-              padding: EdgeInsets.all(8.0),
+              padding: const EdgeInsets.all(8.0),
               child: CircleAvatar(
                 radius: 20,
                 backgroundImage: NetworkImage(userDetails['profileImageUrl'] ?? 'https://cdn-icons-png.flaticon.com/512/2585/2585583.png'),
@@ -40,14 +41,14 @@ class SportsCoachesPage extends StatelessWidget {
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
-                Text('Welcome', style: TextStyle(color: Colors.black)), // Set text color to black
+                const Text('Welcome', style: TextStyle(color: Colors.black)), // Set text color to black
                 Text(
                   userDetails['username'] ?? 'User',
-                  style: TextStyle(color: Colors.black), // Set text color to black
+                  style: const TextStyle(color: Colors.black), // Set text color to black
                 ),
               ],
             ),
-            Spacer(),
+            const Spacer(),
           ],
         ),
       ),
@@ -55,24 +56,24 @@ class SportsCoachesPage extends StatelessWidget {
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: <Widget>[
-          Divider(
+          const Divider(
             color: Colors.grey,
             thickness: 1,
           ),
           Padding(
-            padding: EdgeInsets.all(8.0),
+            padding: const EdgeInsets.all(8.0),
             child: Row(
               children: <Widget>[
-                Text(
+                const Text(
                   'See another sport?',
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: 20,
                   ),
                 ),
-                Spacer(),
+                const Spacer(),
                 IconButton(
-                  icon: Icon(Icons.search),
+                  icon: const Icon(Icons.search),
                   onPressed: () {
                     Navigator.push(
                       context,
@@ -84,7 +85,7 @@ class SportsCoachesPage extends StatelessWidget {
             ),
           ),
           Padding(
-            padding: EdgeInsets.all(8.0),
+            padding: const EdgeInsets.all(8.0),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: <Widget>[
@@ -95,8 +96,8 @@ class SportsCoachesPage extends StatelessWidget {
                       color: Colors.white,
                       borderRadius: BorderRadius.circular(10),
                     ),
-                    padding: EdgeInsets.all(8),
-                    child: Icon(Icons.sports_soccer, size: 40),
+                    padding: const EdgeInsets.all(8),
+                    child: const Icon(Icons.sports_soccer, size: 40, color: Colors.black),
                   ),
                 ),
                 GestureDetector(
@@ -106,8 +107,8 @@ class SportsCoachesPage extends StatelessWidget {
                       color: Colors.white,
                       borderRadius: BorderRadius.circular(10),
                     ),
-                    padding: EdgeInsets.all(8),
-                    child: Icon(Icons.sports_basketball, size: 40),
+                    padding: const EdgeInsets.all(8),
+                    child: const Icon(Icons.sports_basketball, size: 40, color: Colors.black),
                   ),
                 ),
                 GestureDetector(
@@ -117,8 +118,8 @@ class SportsCoachesPage extends StatelessWidget {
                       color: Colors.white,
                       borderRadius: BorderRadius.circular(10),
                     ),
-                    padding: EdgeInsets.all(8),
-                    child: Icon(Icons.sports_tennis, size: 40),
+                    padding: const EdgeInsets.all(8),
+                    child: const Icon(Icons.sports_tennis, size: 40, color: Colors.black),
                   ),
                 ),
                 GestureDetector(
@@ -128,14 +129,14 @@ class SportsCoachesPage extends StatelessWidget {
                       color: Colors.white,
                       borderRadius: BorderRadius.circular(10),
                     ),
-                    padding: EdgeInsets.all(8),
-                    child: Icon(Icons.sports_mma, size: 40),
+                    padding: const EdgeInsets.all(8),
+                    child: const Icon(Icons.sports_mma, size: 40, color: Colors.black),
                   ),
                 ),
               ],
             ),
           ),
-          Padding(
+          const Padding(
             padding: EdgeInsets.all(8.0),
             child: Text(
               'Best ranked coaches',
@@ -146,7 +147,7 @@ class SportsCoachesPage extends StatelessWidget {
             ),
           ),
           Padding(
-            padding: EdgeInsets.all(8.0),
+            padding: const EdgeInsets.all(8.0),
             child: Row(
               children: <Widget>[
                 Expanded(
@@ -156,14 +157,14 @@ class SportsCoachesPage extends StatelessWidget {
                         width: double.infinity,
                         height: 200,
                         decoration: BoxDecoration(
-                          image: DecorationImage(
+                          image: const DecorationImage(
                             image: NetworkImage('https://cdn.shopify.com/s/files/1/0472/7455/7591/files/matjaz1.jpg?v=1623150466'),
                             fit: BoxFit.cover,
                           ),
                           borderRadius: BorderRadius.circular(10),
                           color: Colors.grey[200],
                         ),
-                        child: Row(
+                        child: const Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           crossAxisAlignment: CrossAxisAlignment.end,
                           children: <Widget>[
@@ -174,23 +175,23 @@ class SportsCoachesPage extends StatelessWidget {
                                 Text(
                                   'Table Tennis',
                                   style: TextStyle(
-                                    color: Colors.black,
+                                    color: Colors.white, // Changed text color to white
                                     fontWeight: FontWeight.bold,
                                   ),
                                 ),
                                 Text(
-                                  'Raed Al-Sharif',
+                                  'Khaled Al-Ahmad',
                                   style: TextStyle(
-                                    color: Colors.black,
+                                    color: Colors.white, // Changed text color to white
                                   ),
                                 ),
                               ],
                             ),
                             Padding(
-                              padding: const EdgeInsets.fromLTRB(0, 0, 8, 8),
+                              padding: EdgeInsets.fromLTRB(0, 0, 8, 8),
                               child: CircleAvatar(
                                 radius: 15,
-                                backgroundColor: const Color.fromARGB(255, 44, 184, 249),
+                                backgroundColor: Color.fromARGB(255, 255, 231, 94),
                                 child: Text(
                                   '#1',
                                   style: TextStyle(
@@ -202,16 +203,16 @@ class SportsCoachesPage extends StatelessWidget {
                           ],
                         ),
                       ),
-                      Positioned(
+                      const Positioned(
                         top: 8,
                         right: 8,
-                        child: Icon(Icons.star),
+                        child: Icon(Icons.star, color: Color.fromARGB(255, 255, 231, 94)),
                       ),
                     ],
                   ),
                 ),
                 IconButton(
-                  icon: Icon(Icons.arrow_forward),
+                  icon: const Icon(Icons.arrow_forward),
                   onPressed: () {
                     // Handle arrow tap
                   },
@@ -219,8 +220,8 @@ class SportsCoachesPage extends StatelessWidget {
               ],
             ),
           ),
-          SizedBox(height: 8),
-          Padding(
+          const SizedBox(height: 8),
+          const Padding(
             padding: EdgeInsets.all(8.0),
             child: Text(
               'Quick Sessions',
@@ -240,28 +241,28 @@ class SportsCoachesPage extends StatelessWidget {
                         width: double.infinity,
                         height: 150,
                         decoration: BoxDecoration(
-                          image: DecorationImage(
-                            image: NetworkImage('https://www.britishparatabletennis.com/cdn/shop/articles/newcoach_1000x.png?v=1623150313'),
+                          image: const DecorationImage(
+                            image: AssetImage('lib/images/basketball.jpeg'), // Changed to local asset
                             fit: BoxFit.cover,
                           ),
                           borderRadius: BorderRadius.circular(10),
                           color: Colors.grey[200],
                         ),
-                        child: Column(
+                        child: const Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           mainAxisAlignment: MainAxisAlignment.end,
                           children: <Widget>[
                             Text(
-                              'Table Tennis',
+                              'Basketball',
                               style: TextStyle(
-                                color: Colors.black,
+                                color: Colors.white, // Changed text color to white
                                 fontWeight: FontWeight.bold,
                               ),
                             ),
                             Text(
-                              'Mohammad Oqaily',
+                              'Saleh Alhaj',
                               style: TextStyle(
-                                color: Colors.black,
+                                color: Colors.white, // Changed text color to white
                               ),
                             ),
                           ],
@@ -270,7 +271,7 @@ class SportsCoachesPage extends StatelessWidget {
                     ],
                   ),
                 ),
-                SizedBox(width: 8),
+                const SizedBox(width: 8),
                 Expanded(
                   child: Column(
                     children: <Widget>[
@@ -278,28 +279,28 @@ class SportsCoachesPage extends StatelessWidget {
                         width: double.infinity,
                         height: 150,
                         decoration: BoxDecoration(
-                          image: DecorationImage(
-                            image: NetworkImage('https://c8.alamy.com/comp/2PYXK1K/05-may-2023-hesse-frankfurtmain-jrg-rokopf-national-mens-table-tennis-coach-and-josephina-neumann-13-ttc-berlinyouth-national-player-and-u13-world-number-one-stand-next-to-each-other-in-a-show-match-the-national-table-tennis-coach-and-the-up-and-coming-talent-will-be-promoting-the-wtt-champions-in-the-fall-in-frankfurtm-2910-511-at-the-myzeil-shopping-center-photo-andreas-arnolddpa-2PYXK1K.jpg'),
+                          image: const DecorationImage(
+                            image: AssetImage('lib/images/volleyball.jpg'), // Changed to local asset
                             fit: BoxFit.cover,
                           ),
                           borderRadius: BorderRadius.circular(10),
                           color: Colors.grey[200],
                         ),
-                        child: Column(
+                        child: const Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           mainAxisAlignment: MainAxisAlignment.end,
                           children: <Widget>[
                             Text(
-                              'Table Tennis',
+                              'Volleyball',
                               style: TextStyle(
-                                color: Colors.black,
+                                color: Colors.white, // Changed text color to white
                                 fontWeight: FontWeight.bold,
                               ),
                             ),
                             Text(
-                              'Amro Reda',
+                              'Omar Khader',
                               style: TextStyle(
-                                color: Colors.black,
+                                color: Colors.white, // Changed text color to white
                               ),
                             ),
                           ],
@@ -319,25 +320,25 @@ class SportsCoachesPage extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: <Widget>[
             IconButton(
-              icon: Icon(Icons.home, size: 30),
-              color: const Color.fromARGB(255, 44, 184, 249),
+              icon: const Icon(Icons.home, size: 30),
+              color: const Color.fromARGB(255, 94, 204, 255),
               onPressed: () {},
             ),
             IconButton(
-              icon: Icon(Icons.search, size: 30),
+              icon: const Icon(Icons.search, size: 30),
               onPressed: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => SearchCoachesPage()),
+                  MaterialPageRoute(builder: (context) => const SearchCoachesPage()),
                 );
               },
             ),
             IconButton(
-              icon: Icon(Icons.favorite, size: 30),
+              icon: const Icon(Icons.favorite, size: 30),
               onPressed: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => FavoriteCoaches(title: 'Favorite Coaches',)),
+                  MaterialPageRoute(builder: (context) => const FavoriteCoaches(title: 'Favorite Coaches',)),
                 );
               },
             ),
@@ -347,23 +348,23 @@ class SportsCoachesPage extends StatelessWidget {
                 if (snapshot.connectionState == ConnectionState.done) {
                   bool isCoach = snapshot.data ?? false;
                   return IconButton(
-                    icon: Icon(Icons.person, size: 30),
+                    icon: const Icon(Icons.person, size: 30),
                     onPressed: () {
                       if (isCoach) {
                         Navigator.push(
                           context,
-                          MaterialPageRoute(builder: (context) => CoachProfilePage()),
+                          MaterialPageRoute(builder: (context) => const CoachProfilePage()),
                         );
                       } else {
                         Navigator.push(
                           context,
-                          MaterialPageRoute(builder: (context) => TraineeProfilePage()),
+                          MaterialPageRoute(builder: (context) => const TraineeProfilePage()),
                         );
                       }
                     },
                   );
                 } else {
-                  return Icon(Icons.person, size: 30);
+                  return const Icon(Icons.person, size: 30);
                 }
               },
             ),

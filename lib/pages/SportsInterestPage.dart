@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:sfit/pages/Homepage.dart';
-import 'package:sfit/pages/LoginPage.dart';
 
 class SportsInterestsPage extends StatelessWidget {
   final Map<String, dynamic> userDetails;
 
-  SportsInterestsPage({required this.userDetails});
+  const SportsInterestsPage({super.key, required this.userDetails});
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +21,7 @@ class SportsInterestsPage extends StatelessWidget {
 class SportsInterestsBody extends StatefulWidget {
   final Map<String, dynamic> userDetails;
 
-  SportsInterestsBody({required this.userDetails});
+  const SportsInterestsBody({super.key, required this.userDetails});
 
   @override
   _SportsInterestsBodyState createState() => _SportsInterestsBodyState();
@@ -39,7 +38,7 @@ class _SportsInterestsBodyState extends State<SportsInterestsBody> {
   };
 
   bool isNightMode = false; // Track the current mode
-  TextEditingController _searchController = TextEditingController();
+  final TextEditingController _searchController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -49,9 +48,9 @@ class _SportsInterestsBodyState extends State<SportsInterestsBody> {
         leading: IconButton(
           icon: Icon(Icons.arrow_back, color: isNightMode ? Colors.white : Colors.black),
           onPressed: () {
-            Navigator.push(
+            Navigator.pushReplacement(
               context,
-              MaterialPageRoute(builder: (context) => LoginPage()),
+              MaterialPageRoute(builder: (context) => SportsCoachesPage(userDetails: widget.userDetails)),
             );
           },
         ),
@@ -67,7 +66,7 @@ class _SportsInterestsBodyState extends State<SportsInterestsBody> {
       bottomNavigationBar: BottomAppBar(
         color: isNightMode ? Colors.black : Colors.white,
         child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
+          padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
@@ -80,15 +79,15 @@ class _SportsInterestsBodyState extends State<SportsInterestsBody> {
                     ),
                   );
                 },
-                child: Text(
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: isNightMode ? Colors.white : const Color.fromARGB(255, 96, 184, 255),
+                ),
+                child: const Text(
                   "Finish",
                   style: TextStyle(
                     color: Colors.black,
                     fontWeight: FontWeight.bold,
                   ),
-                ),
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: isNightMode ? Colors.white : const Color.fromARGB(255, 96, 184, 255),
                 ),
               ),
             ],
@@ -104,7 +103,7 @@ class _SportsInterestsBodyState extends State<SportsInterestsBody> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          SizedBox(height: 20),
+          const SizedBox(height: 20),
           Row(
             children: [
               Expanded(
@@ -117,12 +116,12 @@ class _SportsInterestsBodyState extends State<SportsInterestsBody> {
                     },
                     decoration: InputDecoration(
                       hintText: "Search sport",
-                      hintStyle: TextStyle(color: Colors.grey),
+                      hintStyle: const TextStyle(color: Colors.grey),
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(20.0),
                       ),
-                      contentPadding: EdgeInsets.symmetric(vertical: 15.0),
-                      prefixIcon: Icon(Icons.search, color: Colors.grey),
+                      contentPadding: const EdgeInsets.symmetric(vertical: 15.0),
+                      prefixIcon: const Icon(Icons.search, color: Colors.grey),
                       filled: true,
                       fillColor: isNightMode ? Colors.grey[900] : Colors.white,
                     ),
@@ -131,7 +130,7 @@ class _SportsInterestsBodyState extends State<SportsInterestsBody> {
               ),
             ],
           ),
-          SizedBox(height: 20),
+          const SizedBox(height: 20),
           Expanded(
             child: GridView.count(
               crossAxisCount: 2,
@@ -148,7 +147,7 @@ class _SportsInterestsBodyState extends State<SportsInterestsBody> {
               }).toList(),
             ),
           ),
-          SizedBox(height: 20),
+          const SizedBox(height: 20),
           Align(
             alignment: Alignment.center,
             child: InkWell(
@@ -164,7 +163,7 @@ class _SportsInterestsBodyState extends State<SportsInterestsBody> {
               ),
             ),
           ),
-          SizedBox(height: 20),
+          const SizedBox(height: 20),
         ],
       ),
     );
@@ -213,7 +212,7 @@ class _SportsInterestsBodyState extends State<SportsInterestsBody> {
             bottom: 10,
             child: Text(
               sportName,
-              style: TextStyle(
+              style: const TextStyle(
                 color: Colors.white,
                 fontWeight: FontWeight.bold,
                 fontSize: 16, // Adjust the font size here

@@ -4,6 +4,8 @@ import 'package:firebase_database/firebase_database.dart';
 import 'package:intl/intl.dart';
 
 class CoachProfilePage extends StatefulWidget {
+  const CoachProfilePage({super.key});
+
   @override
   _CoachProfilePageState createState() => _CoachProfilePageState();
 }
@@ -65,11 +67,11 @@ class _CoachProfilePageState extends State<CoachProfilePage> {
       backgroundColor: Colors.white,
       appBar: AppBar(
         backgroundColor: Colors.white,
-        title: Text(
+        title: const Text(
           'Coach Profile',
           style: TextStyle(color: Colors.black),
         ),
-        iconTheme: IconThemeData(color: Colors.black),
+        iconTheme: const IconThemeData(color: Colors.black),
       ),
       body: SingleChildScrollView(
         child: Column(
@@ -77,7 +79,7 @@ class _CoachProfilePageState extends State<CoachProfilePage> {
           children: [
             Container(
               height: 200,
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                 image: DecorationImage(
                   image: NetworkImage('https://www.britishparatabletennis.com/cdn/shop/articles/newcoach_1000x.png?v=1623150313'),
                   fit: BoxFit.cover,
@@ -92,84 +94,84 @@ class _CoachProfilePageState extends State<CoachProfilePage> {
                       radius: 50,
                       backgroundImage: _userData.isNotEmpty && _userData['profileImageUrl'] != null
                           ? NetworkImage(_userData['profileImageUrl'])
-                          : NetworkImage('https://cdn-icons-png.flaticon.com/512/2585/2585583.png'),
+                          : const NetworkImage('https://cdn-icons-png.flaticon.com/512/2585/2585583.png'),
                     ),
                   ),
                 ],
               ),
             ),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             Text(
               '${_userData['first_name'] ?? 'First Name'} ${_userData['last_name'] ?? 'Last Name'}',
-              style: TextStyle(
+              style: const TextStyle(
                 fontSize: 24,
                 fontWeight: FontWeight.bold,
               ),
               textAlign: TextAlign.center,
             ),
-            SizedBox(height: 10),
+            const SizedBox(height: 10),
             Container(
-              padding: EdgeInsets.symmetric(horizontal: 20),
+              padding: const EdgeInsets.symmetric(horizontal: 20),
               child: Column(
                 children: [
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Container(
-                        padding: EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
                         decoration: BoxDecoration(
                           color: Colors.blue,
                           borderRadius: BorderRadius.circular(20),
                         ),
                         child: Text(
                           '@${_userData['username'] ?? 'Username'}',
-                          style: TextStyle(
+                          style: const TextStyle(
                             color: Colors.white,
                             fontWeight: FontWeight.bold,
                           ),
                         ),
                       ),
-                      SizedBox(width: 10),
+                      const SizedBox(width: 10),
                       Container(
-                        padding: EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
                         decoration: BoxDecoration(
                           color: Colors.blue,
                           borderRadius: BorderRadius.circular(20),
                         ),
                         child: Text(
                           'Age: $age',
-                          style: TextStyle(
+                          style: const TextStyle(
                             color: Colors.white,
                             fontWeight: FontWeight.bold,
                           ),
                         ),
                       ),
                       if (_contactDetailsVisible) ...[
-                        SizedBox(width: 10),
+                        const SizedBox(width: 10),
                         Container(
-                          padding: EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                          padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
                           decoration: BoxDecoration(
                             color: Colors.blue,
                             borderRadius: BorderRadius.circular(20),
                           ),
                           child: Text(
                             'Email: ${_userData['email'] ?? 'Email'}',
-                            style: TextStyle(
+                            style: const TextStyle(
                               color: Colors.white,
                               fontWeight: FontWeight.bold,
                             ),
                           ),
                         ),
-                        SizedBox(width: 10),
+                        const SizedBox(width: 10),
                         Container(
-                          padding: EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                          padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
                           decoration: BoxDecoration(
                             color: Colors.blue,
                             borderRadius: BorderRadius.circular(20),
                           ),
                           child: Text(
                             'Phone: ${_userData['phone_number'] ?? 'Phone Number'}',
-                            style: TextStyle(
+                            style: const TextStyle(
                               color: Colors.white,
                               fontWeight: FontWeight.bold,
                             ),
@@ -178,8 +180,8 @@ class _CoachProfilePageState extends State<CoachProfilePage> {
                       ],
                     ],
                   ),
-                  SizedBox(height: 10),
-                  Text(
+                  const SizedBox(height: 10),
+                  const Text(
                     'Special needs professional coach,\nwith international certificates,\nbe a champ with me',
                     textAlign: TextAlign.center,
                     style: TextStyle(
@@ -189,7 +191,7 @@ class _CoachProfilePageState extends State<CoachProfilePage> {
                 ],
               ),
             ),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
@@ -206,7 +208,7 @@ class _CoachProfilePageState extends State<CoachProfilePage> {
                       borderRadius: BorderRadius.circular(16),
                       border: Border.all(color: Colors.grey),
                     ),
-                    child: Center(
+                    child: const Center(
                       child: Text(
                         'Contact Details',
                         style: TextStyle(
@@ -216,7 +218,7 @@ class _CoachProfilePageState extends State<CoachProfilePage> {
                     ),
                   ),
                 ),
-                SizedBox(width: 10),
+                const SizedBox(width: 10),
                 GestureDetector(
                   onTap: () {
                     // Add functionality for settings
@@ -228,13 +230,13 @@ class _CoachProfilePageState extends State<CoachProfilePage> {
                       borderRadius: BorderRadius.circular(16),
                       border: Border.all(color: Colors.grey),
                     ),
-                    child: Icon(Icons.settings),
+                    child: const Icon(Icons.settings),
                   ),
                 ),
               ],
             ),
-            SizedBox(height: 20),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
+            const SizedBox(height: 20),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
@@ -249,7 +251,7 @@ class _CoachProfilePageState extends State<CoachProfilePage> {
                       borderRadius: BorderRadius.circular(16),
                       border: Border.all(color: Colors.grey),
                     ),
-                    child: Center(
+                    child: const Center(
                       child: Text(
                         'Add Certificate',
                         textAlign: TextAlign.center,
@@ -268,7 +270,7 @@ class _CoachProfilePageState extends State<CoachProfilePage> {
                       borderRadius: BorderRadius.circular(16),
                       border: Border.all(color: Colors.grey),
                     ),
-                    child: Center(
+                    child: const Center(
                       child: Text(
                         'Edit your schedule',
                         textAlign: TextAlign.center,
@@ -278,8 +280,8 @@ class _CoachProfilePageState extends State<CoachProfilePage> {
                 ),
               ],
             ),
-            SizedBox(height: 20),
-            Row(
+            const SizedBox(height: 20),
+            const Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 Column(
@@ -320,23 +322,23 @@ class _CoachProfilePageState extends State<CoachProfilePage> {
                 ),
               ],
             ),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             GestureDetector(
               onTap: () {
                 // Add functionality for location
               },
               child: Container(
                 height: 60,
-                margin: EdgeInsets.symmetric(horizontal: 20),
+                margin: const EdgeInsets.symmetric(horizontal: 20),
                 decoration: BoxDecoration(
                   color: Colors.grey[300],
                   borderRadius: BorderRadius.circular(10),
                 ),
-                child: Row(
+                child: const Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Padding(
-                      padding: const EdgeInsets.all(8.0),
+                      padding: EdgeInsets.all(8.0),
                       child: Text(
                         'Location',
                         style: TextStyle(
@@ -350,19 +352,19 @@ class _CoachProfilePageState extends State<CoachProfilePage> {
                 ),
               ),
             ),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             GestureDetector(
               onTap: () {
                 // Add functionality for feedback
               },
               child: Container(
-                padding: EdgeInsets.all(20),
-                margin: EdgeInsets.symmetric(horizontal: 20),
+                padding: const EdgeInsets.all(20),
+                margin: const EdgeInsets.symmetric(horizontal: 20),
                 decoration: BoxDecoration(
                   color: Colors.grey[300],
                   borderRadius: BorderRadius.circular(10),
                 ),
-                child: Column(
+                child: const Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
                     Row(
@@ -405,7 +407,7 @@ class _CoachProfilePageState extends State<CoachProfilePage> {
                 ),
               ),
             ),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
@@ -413,31 +415,31 @@ class _CoachProfilePageState extends State<CoachProfilePage> {
                   onPressed: () {
                     // Add functionality for home button
                   },
-                  icon: Icon(Icons.home),
+                  icon: const Icon(Icons.home),
                 ),
                 IconButton(
                   onPressed: () {
                     // Add functionality for search button
                   },
-                  icon: Icon(Icons.search),
+                  icon: const Icon(Icons.search),
                 ),
                 IconButton(
                   onPressed: () {
                     // Add functionality for add button
                   },
-                  icon: Icon(Icons.add),
+                  icon: const Icon(Icons.add),
                 ),
                 IconButton(
                   onPressed: () {
                     // Add functionality for message button
                   },
-                  icon: Icon(Icons.message),
+                  icon: const Icon(Icons.message),
                 ),
                 IconButton(
                   onPressed: () {
                     // Add functionality for profile button
                   },
-                  icon: Icon(Icons.person),
+                  icon: const Icon(Icons.person),
                   color: Colors.lightBlue,
                 ),
               ],

@@ -8,21 +8,26 @@ import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 import 'package:sfit/pages/GuardianSetup.dart';
 
 class SignUpPage extends StatelessWidget {
+  const SignUpPage({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.white, // Set background color of app bar to white
+        backgroundColor: Colors.white,
+        elevation: 0,
       ),
-      body: SingleChildScrollView(
+      body: const SingleChildScrollView(
         child: SignUpForm(),
       ),
-      backgroundColor: Colors.white, // Set background color of scaffold to white
+      backgroundColor: Colors.white,
     );
   }
 }
 
 class SignUpForm extends StatefulWidget {
+  const SignUpForm({super.key});
+
   @override
   _SignUpFormState createState() => _SignUpFormState();
 }
@@ -31,7 +36,7 @@ class _SignUpFormState extends State<SignUpForm> {
   final _formKey = GlobalKey<FormState>();
 
   File? _image;
-  String? _imageUrl; // Variable to store the image URL
+  String? _imageUrl;
   String? _firstName;
   String? _lastName;
   int? _day;
@@ -47,12 +52,26 @@ class _SignUpFormState extends State<SignUpForm> {
   bool _obscurePassword = true;
   List<Map<String, dynamic>> _juniorTrainees = [];
 
+  InputDecoration _inputDecoration(String hintText) {
+    return InputDecoration(
+      hintText: hintText,
+      hintStyle: const TextStyle(color: Colors.grey),
+      filled: true,
+      fillColor: Colors.grey[200],
+      border: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(8.0),
+        borderSide: BorderSide.none,
+      ),
+      contentPadding: const EdgeInsets.symmetric(vertical: 15.0, horizontal: 20.0),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Form(
       key: _formKey,
       child: Padding(
-        padding: EdgeInsets.all(20.0),
+        padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
@@ -62,30 +81,28 @@ class _SignUpFormState extends State<SignUpForm> {
               },
               child: CircleAvatar(
                 radius: 70,
-                backgroundColor: Colors.transparent,
-                child: _image != null 
-                  ? ClipOval(
-                      child: Image.file(
-                        _image!,
-                        width: 160,
-                        height: 160,
-                        fit: BoxFit.cover,
-                      ),
-                    )
-                  : Icon(Icons.person, size: 50),
+                backgroundColor: const Color.fromARGB(255, 94, 204, 255), // Blue background color
+                child: _image != null
+                    ? ClipOval(
+                        child: Image.file(
+                          _image!,
+                          width: 140,
+                          height: 140,
+                          fit: BoxFit.cover,
+                        ),
+                      )
+                    : const Icon(Icons.person, size: 70, color: Colors.white), // White icon color
               ),
             ),
-            SizedBox(height: 10.0),
-            Text(
+            const SizedBox(height: 10.0),
+            const Text(
               'Sign up',
               style: TextStyle(fontSize: 24.0, fontWeight: FontWeight.bold),
               textAlign: TextAlign.center,
             ),
-            SizedBox(height: 10.0),
+            const SizedBox(height: 20.0),
             TextFormField(
-              decoration: InputDecoration(
-                hintText: 'First name',
-              ),
+              decoration: _inputDecoration('First name'),
               validator: (value) {
                 if (value == null || value.isEmpty) {
                   return 'Please enter your first name';
@@ -100,11 +117,9 @@ class _SignUpFormState extends State<SignUpForm> {
                 _firstName = value;
               },
             ),
-            SizedBox(height: 10.0),
+            const SizedBox(height: 10.0),
             TextFormField(
-              decoration: InputDecoration(
-                hintText: 'Last name',
-              ),
+              decoration: _inputDecoration('Last name'),
               validator: (value) {
                 if (value == null || value.isEmpty) {
                   return 'Please enter your last name';
@@ -119,97 +134,90 @@ class _SignUpFormState extends State<SignUpForm> {
                 _lastName = value;
               },
             ),
-            SizedBox(height: 10.0),
-            Row(
+            const SizedBox(height: 10.0),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text('Birthdate'),
-                SizedBox(width: 10.0),
-                Expanded(
-                  child: Row(
-                    children: [
-                      Expanded(
-                        child: DropdownButtonFormField(
-                          items: List.generate(31, (index) {
-                            return DropdownMenuItem(
-                              child: Text('${index + 1}'),
-                              value: index + 1,
-                            );
-                          }),
-                          decoration: InputDecoration(
-                            labelText: 'Day',
-                          ),
-                          onChanged: (int? value) {},
-                          validator: (value) {
-                            if (value == null) {
-                              return 'Please select a day';
-                            }
-                            return null;
-                          },
-                          onSaved: (value) {
-                            _day = value as int?;
-                          },
-                        ),
+                const Text('Birthdate'),
+                const SizedBox(height: 10.0),
+                Row(
+                  children: [
+                    Expanded(
+                      child: DropdownButtonFormField<int>(
+                        items: List.generate(31, (index) {
+                          return DropdownMenuItem(
+                            value: index + 1,
+                            child: Text('${index + 1}'),
+                          );
+                        }),
+                        decoration: _inputDecoration('Day'),
+                        onChanged: (int? value) {},
+                        validator: (value) {
+                          if (value == null) {
+                            return 'Please select a day';
+                          }
+                          return null;
+                        },
+                        onSaved: (value) {
+                          _day = value;
+                        },
                       ),
-                      SizedBox(width: 10.0),
-                      Expanded(
-                        child: DropdownButtonFormField(
-                          items: List.generate(12, (index) {
-                            return DropdownMenuItem(
-                              child: Text('${index + 1}'),
-                              value: index + 1,
-                            );
-                          }),
-                          decoration: InputDecoration(
-                            labelText: 'Month',
-                          ),
-                          onChanged: (int? value) {},
-                          validator: (value) {
-                            if (value == null) {
-                              return 'Please select a month';
-                            }
-                            return null;
-                          },
-                          onSaved: (value) {
-                            _month = value as int?;
-                          },
-                        ),
+                    ),
+                    const SizedBox(width: 10.0),
+                    Expanded(
+                      child: DropdownButtonFormField<int>(
+                        items: List.generate(12, (index) {
+                          return DropdownMenuItem(
+                            value: index + 1,
+                            child: Text('${index + 1}'),
+                          );
+                        }),
+                        decoration: _inputDecoration('Month'),
+                        onChanged: (int? value) {},
+                        validator: (value) {
+                          if (value == null) {
+                            return 'Please select a month';
+                          }
+                          return null;
+                        },
+                        onSaved: (value) {
+                          _month = value;
+                        },
                       ),
-                      SizedBox(width: 10.0),
-                      Expanded(
-                        child: DropdownButtonFormField(
-                          items: List.generate(DateTime.now().year - 1970 + 1, (index) {
-                            return DropdownMenuItem(
-                              child: Text('${DateTime.now().year - index}'),
-                              value: DateTime.now().year - index,
-                            );
-                          }),
-                          decoration: InputDecoration(
-                            labelText: 'Year',
-                          ),
-                          onChanged: (int? value) {},
-                          validator: (value) {
-                            if (value == null) {
-                              return 'Please select a year';
-                            } else if (DateTime.now().year - value < 18) {
-                              return 'You must be at least 18 years old';
-                            }
-                            return null;
-                          },
-                          onSaved: (value) {
-                            _year = value as int?;
-                          },
-                        ),
+                    ),
+                    const SizedBox(width: 10.0),
+                    Expanded(
+                      child: DropdownButtonFormField<int>(
+                        items: List.generate(DateTime.now().year - 1970 + 1, (index) {
+                          return DropdownMenuItem(
+                            value: DateTime.now().year - index,
+                            child: Text('${DateTime.now().year - index}'),
+                          );
+                        }),
+                        decoration: _inputDecoration('Year'),
+                        onChanged: (int? value) {},
+                        validator: (value) {
+                          if (value == null) {
+                            return 'Please select a year';
+                          } else if (DateTime.now().year - value < 18) {
+                            return 'You must be at least 18 years old';
+                          }
+                          return null;
+                        },
+                        onSaved: (value) {
+                          _year = value;
+                        },
                       ),
-                    ],
-                  ),
+                    ),
+                  ],
                 ),
               ],
             ),
-            SizedBox(height: 10.0),
+            const SizedBox(height: 10.0),
             TextFormField(
-              decoration: InputDecoration(
-                hintText: 'Phone number',
-                suffixIcon: Icon(Icons.call),
+              decoration: _inputDecoration('Phone number').copyWith(
+                prefixText: '+962 ',
+                suffixIcon: const Icon(Icons.call),
               ),
               keyboardType: TextInputType.phone,
               validator: (value) {
@@ -224,11 +232,10 @@ class _SignUpFormState extends State<SignUpForm> {
                 _phoneNumber = value;
               },
             ),
-            SizedBox(height: 10.0),
+            const SizedBox(height: 10.0),
             TextFormField(
-              decoration: InputDecoration(
-                hintText: 'Email',
-                suffixIcon: Icon(Icons.email),
+              decoration: _inputDecoration('Email').copyWith(
+                suffixIcon: const Icon(Icons.email),
               ),
               keyboardType: TextInputType.emailAddress,
               validator: (value) {
@@ -245,11 +252,10 @@ class _SignUpFormState extends State<SignUpForm> {
                 _email = value;
               },
             ),
-            SizedBox(height: 10.0),
+            const SizedBox(height: 10.0),
             TextFormField(
-              decoration: InputDecoration(
-                hintText: 'Create Username',
-                suffixIcon: Icon(Icons.person),
+              decoration: _inputDecoration('Create a username').copyWith(
+                suffixIcon: const Icon(Icons.person),
               ),
               validator: (value) {
                 if (value == null || value.isEmpty) {
@@ -265,10 +271,9 @@ class _SignUpFormState extends State<SignUpForm> {
                 _username = value;
               },
             ),
-            SizedBox(height: 10.0),
+            const SizedBox(height: 10.0),
             TextFormField(
-              decoration: InputDecoration(
-                hintText: 'Create password',
+              decoration: _inputDecoration('Create password').copyWith(
                 suffixIcon: IconButton(
                   icon: Icon(
                     _obscurePassword ? Icons.visibility : Icons.visibility_off,
@@ -295,10 +300,9 @@ class _SignUpFormState extends State<SignUpForm> {
                 _password = value;
               },
             ),
-            SizedBox(height: 10.0),
+            const SizedBox(height: 10.0),
             TextFormField(
-              decoration: InputDecoration(
-                hintText: 'Repeat password',
+              decoration: _inputDecoration('Repeat password').copyWith(
                 suffixIcon: IconButton(
                   icon: Icon(
                     _obscurePassword ? Icons.visibility : Icons.visibility_off,
@@ -323,9 +327,9 @@ class _SignUpFormState extends State<SignUpForm> {
                 _repeatPassword = value;
               },
             ),
-            SizedBox(height: 10.0),
+            const SizedBox(height: 10.0),
             CheckboxListTile(
-              title: Text('Individual with Unique Abilities'),
+              title: const Text('Individual with unique abilities'),
               value: _individualWithUniqueAbilities,
               onChanged: (newValue) {
                 setState(() {
@@ -334,7 +338,7 @@ class _SignUpFormState extends State<SignUpForm> {
               },
             ),
             CheckboxListTile(
-              title: Text('Guardian for Trainees'),
+              title: const Text('Guardian for trainees?'),
               value: _guardianForTrainees,
               onChanged: (newValue) async {
                 setState(() {
@@ -344,7 +348,7 @@ class _SignUpFormState extends State<SignUpForm> {
                   final result = await Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => GuardianSetupPage(),
+                      builder: (context) => const GuardianSetupPage(),
                     ),
                   );
                   if (result != null) {
@@ -355,20 +359,31 @@ class _SignUpFormState extends State<SignUpForm> {
                 }
               },
             ),
-            ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                backgroundColor: const Color.fromARGB(255, 94, 204, 255),),
-              onPressed: () {
-                if (_formKey.currentState!.validate()) {
-                  _formKey.currentState!.save();
-                  _signUp();
-                }
-              },
-              child: Text('Confirm',
-              style: TextStyle(
-                      color: Colors.black,
-                      fontWeight: FontWeight.bold,
-                    )),
+            SizedBox(
+              width: 120.0, // Adjust the width as needed
+              height: 50.0, // Adjust the height as needed
+              child: ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: const Color.fromARGB(255, 94, 204, 255), // Background color
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(20.0), // Rounded corners
+                  ),
+                  minimumSize: const Size(120, 50), // Minimum size
+                ),
+                onPressed: () {
+                  if (_formKey.currentState!.validate()) {
+                    _formKey.currentState!.save();
+                    _signUp();
+                  }
+                },
+                child: const Text(
+                  'Confirm',
+                  style: TextStyle(
+                    color: Colors.black,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
             ),
           ],
         ),
@@ -421,10 +436,10 @@ class _SignUpFormState extends State<SignUpForm> {
           'password': _password,
           'individualWithUniqueAbilities': _individualWithUniqueAbilities,
           'guardianForTrainees': _guardianForTrainees,
-          'profileImageUrl': _imageUrl, // Save the image URL in the database
-          'juniorTrainees': _juniorTrainees, // Save the junior trainees details in the database
+          'profileImageUrl': _imageUrl,
+          'juniorTrainees': _juniorTrainees,
         });
-        Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => LoginPage()));
+        Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const LoginPage()));
       }
     } catch (e) {
       print('Error signing up: $e');

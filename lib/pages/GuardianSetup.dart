@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:sfit/pages/TraineeSignUpPage.dart';
 
 class GuardianSetupPage extends StatefulWidget {
+  const GuardianSetupPage({super.key});
+
   @override
   _GuardianSetupPageState createState() => _GuardianSetupPageState();
 }
@@ -76,7 +77,7 @@ class _GuardianSetupPageState extends State<GuardianSetupPage> {
         appBar: AppBar(
           backgroundColor: Colors.white,
           centerTitle: true,
-          title: Text(
+          title: const Text(
             "SportConnect",
             style: TextStyle(
               fontWeight: FontWeight.bold,
@@ -84,7 +85,7 @@ class _GuardianSetupPageState extends State<GuardianSetupPage> {
             ),
           ),
           leading: IconButton(
-            icon: Icon(Icons.arrow_back),
+            icon: const Icon(Icons.arrow_back),
             onPressed: () {
               Navigator.pop(context, _juniorTrainees);
             },
@@ -95,9 +96,9 @@ class _GuardianSetupPageState extends State<GuardianSetupPage> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              Divider(),
-              Padding(
-                padding: const EdgeInsets.all(8.0),
+              const Divider(),
+              const Padding(
+                padding: EdgeInsets.all(8.0),
                 child: Text(
                   "Junior Trainee Details",
                   style: TextStyle(
@@ -107,21 +108,21 @@ class _GuardianSetupPageState extends State<GuardianSetupPage> {
                 ),
               ),
               Card(
-                margin: EdgeInsets.symmetric(horizontal: 10),
+                margin: const EdgeInsets.symmetric(horizontal: 10),
                 color: const Color.fromARGB(255, 223, 223, 223),
                 child: Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Column(
                     children: [
                       TextField(
-                        decoration: InputDecoration(labelText: "Junior Trainee Name"),
+                        decoration: const InputDecoration(labelText: "Junior Trainee Name"),
                         onChanged: (value) {
                           _juniorName = value;
                         },
                         controller: TextEditingController(text: _juniorName),
                       ),
                       DropdownButtonFormField<String>(
-                        decoration: InputDecoration(labelText: "Junior Trainee Gender"),
+                        decoration: const InputDecoration(labelText: "Junior Trainee Gender"),
                         items: ['Male', 'Female'].map((String value) {
                           return DropdownMenuItem<String>(
                             value: value,
@@ -134,7 +135,7 @@ class _GuardianSetupPageState extends State<GuardianSetupPage> {
                         value: _juniorGender,
                       ),
                       DropdownButtonFormField<int>(
-                        decoration: InputDecoration(labelText: "Junior Trainee Age"),
+                        decoration: const InputDecoration(labelText: "Junior Trainee Age"),
                         items: List.generate(13, (index) {
                           return DropdownMenuItem<int>(
                             value: index + 5,
@@ -146,23 +147,23 @@ class _GuardianSetupPageState extends State<GuardianSetupPage> {
                         },
                         value: _juniorAge,
                       ),
-                      SizedBox(height: 10),
+                      const SizedBox(height: 10),
                       ElevatedButton(
                         onPressed: _addOrUpdateJunior,
-                        child: Text(
-                          _editingIndex == null ? "Add Junior Trainee" : "Update Junior Trainee",
-                          style: TextStyle(color: Colors.black),
-                        ),
                         style: ElevatedButton.styleFrom(
                           backgroundColor: Colors.blue,
+                        ),
+                        child: Text(
+                          _editingIndex == null ? "Add Junior Trainee" : "Update Junior Trainee",
+                          style: const TextStyle(color: Colors.black),
                         ),
                       ),
                     ],
                   ),
                 ),
               ),
-              Padding(
-                padding: const EdgeInsets.all(8.0),
+              const Padding(
+                padding: EdgeInsets.all(8.0),
                 child: Text(
                   "Junior Trainees List",
                   style: TextStyle(
@@ -189,19 +190,19 @@ class _GuardianSetupPageState extends State<GuardianSetupPage> {
                         onTap: () {
                           _editJunior(index);
                         },
-                        child: Text(
+                        child: const Text(
                           "Edit",
                           style: TextStyle(color: Colors.black),
                         ),
                       ),
-                      SizedBox(width: 10),
+                      const SizedBox(width: 10),
                       GestureDetector(
                         onTap: () {
                           setState(() {
                             _juniorTrainees.removeAt(index);
                           });
                         },
-                        child: Text(
+                        child: const Text(
                           "Delete",
                           style: TextStyle(color: Colors.black),
                         ),
@@ -217,13 +218,13 @@ class _GuardianSetupPageState extends State<GuardianSetupPage> {
           onPressed: () {
             Navigator.pop(context, _juniorTrainees);
           },
-          child: Text(
+          backgroundColor: Colors.blue,
+          child: const Text(
             "Next",
             style: TextStyle(
               fontWeight: FontWeight.bold,
             ),
           ),
-          backgroundColor: Colors.blue,
         ),
         floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
       ),

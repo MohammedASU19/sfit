@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:sfit/pages/ForgotPasswordPage.dart';
-import 'package:sfit/pages/TraineeSignUpPage.dart';
-import 'package:sfit/pages/SportsInterestPage.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:sfit/pages/HomePage.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:sfit/pages/ChooseRolePage.dart';
 
 class LoginPage extends StatefulWidget {
+  const LoginPage({super.key});
+
   @override
   _LoginPageState createState() => _LoginPageState();
 }
@@ -48,13 +48,13 @@ class _LoginPageState extends State<LoginPage> {
         } else {
           print('User details not found for UID: $uid');
           ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(content: Text('The User details not found! Please Login with an authenticated User')),
+            const SnackBar(content: Text('The User details not found! Please Login with an authenticated User')),
           );
         }
       } else {
         print('Authentication failed. Please check your login credentials.');
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Authentication failed. Please check your login credentials.')),
+          const SnackBar(content: Text('Authentication failed. Please check your login credentials.')),
         );
       }
     } catch (e) {
@@ -79,25 +79,25 @@ class _LoginPageState extends State<LoginPage> {
                 width: 200,
                 height: 200,
               ),
-              SizedBox(height: 20.0),
-              Text(
+              const SizedBox(height: 20.0),
+              const Text(
                 'SparkFitness',
                 style: TextStyle(
                   fontSize: 30.0,
                   fontWeight: FontWeight.bold,
                 ),
               ),
-              SizedBox(height: 20.0),
+              const SizedBox(height: 20.0),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 40.0),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(
+                    const Text(
                       'Email',
                       style: TextStyle(fontSize: 16, color: Colors.black),
                     ),
-                    SizedBox(height: 5),
+                    const SizedBox(height: 5),
                     TextField(
                       controller: _emailController,
                       keyboardType: TextInputType.emailAddress,
@@ -108,12 +108,12 @@ class _LoginPageState extends State<LoginPage> {
                         ),
                       ),
                     ),
-                    SizedBox(height: 20),
-                    Text(
+                    const SizedBox(height: 20),
+                    const Text(
                       'Password',
                       style: TextStyle(fontSize: 16, color: Colors.black),
                     ),
-                    SizedBox(height: 5),
+                    const SizedBox(height: 5),
                     TextField(
                       controller: _passwordController,
                       obscureText: true,
@@ -124,7 +124,7 @@ class _LoginPageState extends State<LoginPage> {
                         ),
                       ),
                     ),
-                    SizedBox(height: 20),
+                    const SizedBox(height: 20),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
@@ -139,17 +139,17 @@ class _LoginPageState extends State<LoginPage> {
                                 print('Remember me: $rememberMe');
                               },
                             ),
-                            Text('Remember Me'),
+                            const Text('Remember Me'),
                           ],
                         ),
                         GestureDetector(
                           onTap: () {
                             Navigator.push(
                               context,
-                              MaterialPageRoute(builder: (context) => ForgotPasswordPage()),
+                              MaterialPageRoute(builder: (context) => const ForgotPasswordPage()),
                             );
                           },
-                          child: Text(
+                          child: const Text(
                             'Forgot your password?',
                             style: TextStyle(
                               color: Colors.blue,
@@ -158,36 +158,36 @@ class _LoginPageState extends State<LoginPage> {
                         ),
                       ],
                     ),
-                    SizedBox(height: 20),
+                    const SizedBox(height: 20),
                     Center(
                       child: ElevatedButton(
                         onPressed: _login,
-                        child: Text(
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: const Color.fromARGB(255, 94, 204, 255),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(20),
+                          ),
+                          minimumSize: const Size(300, 50),
+                        ),
+                        child: const Text(
                           'Log In',
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
                             color: Colors.black,
                           ),
                         ),
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: const Color.fromARGB(255, 94, 204, 255),
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(20),
-                          ),
-                          minimumSize: Size(300, 50),
-                        ),
                       ),
                     ),
-                    SizedBox(height: 20),
+                    const SizedBox(height: 20),
                     Center(
                       child: GestureDetector(
                         onTap: () {
                           Navigator.push(
                             context,
-                            MaterialPageRoute(builder: (context) => ChooseRolePage()),
+                            MaterialPageRoute(builder: (context) => const ChooseRolePage()),
                           );
                         },
-                        child: Text(
+                        child: const Text(
                           "Don't have an account?",
                           style: TextStyle(
                             color: Colors.black,

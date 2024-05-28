@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:sfit/pages/LoginPage.dart';
 
 class ForgotPasswordPage extends StatelessWidget {
+  const ForgotPasswordPage({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -15,7 +17,7 @@ class ForgotPasswordPage extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            Text(
+            const Text(
               'Forgot Password?',
               style: TextStyle(
                 fontSize: 24.0,
@@ -23,30 +25,30 @@ class ForgotPasswordPage extends StatelessWidget {
               ),
               textAlign: TextAlign.center,
             ),
-            SizedBox(height: 20.0),
-            Text(
+            const SizedBox(height: 20.0),
+            const Text(
               'Receive code via email or phone',
               style: TextStyle(fontSize: 16.0),
               textAlign: TextAlign.center,
             ),
-            SizedBox(height: 10.0),
+            const SizedBox(height: 10.0),
             // Button for email
-            Container(
+            SizedBox(
               height: 50.0,
               child: TextButton(
                 onPressed: () {
                   _showEmailDialog(context);
                 },
                 style: ButtonStyle(
-                  backgroundColor: MaterialStateProperty.all(Colors.white),
-                  shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                  backgroundColor: WidgetStateProperty.all(Colors.white),
+                  shape: WidgetStateProperty.all<RoundedRectangleBorder>(
                     RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(10.0),
-                      side: BorderSide(color: Colors.black),
+                      side: const BorderSide(color: Colors.black),
                     ),
                   ),
                 ),
-                child: Text(
+                child: const Text(
                   'Via Email',
                   style: TextStyle(
                     color: Colors.black,
@@ -54,24 +56,24 @@ class ForgotPasswordPage extends StatelessWidget {
                 ),
               ),
             ),
-            SizedBox(height: 10.0),
+            const SizedBox(height: 10.0),
             // Button for phone number
-            Container(
+            SizedBox(
               height: 50.0,
               child: TextButton(
                 onPressed: () {
                   _showPhoneNumberDialog(context);
                 },
                 style: ButtonStyle(
-                  backgroundColor: MaterialStateProperty.all(Colors.white),
-                  shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                  backgroundColor: WidgetStateProperty.all(Colors.white),
+                  shape: WidgetStateProperty.all<RoundedRectangleBorder>(
                     RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(10.0),
-                      side: BorderSide(color: Colors.black),
+                      side: const BorderSide(color: Colors.black),
                     ),
                   ),
                 ),
-                child: Text(
+                child: const Text(
                   'Via Phone Number',
                   style: TextStyle(
                     color: Colors.black,
@@ -79,7 +81,7 @@ class ForgotPasswordPage extends StatelessWidget {
                 ),
               ),
             ),
-            SizedBox(height: 10.0),
+            const SizedBox(height: 10.0),
             // Text field for entering code
             TextFormField(
               decoration: InputDecoration(
@@ -95,24 +97,24 @@ class ForgotPasswordPage extends StatelessWidget {
                 return null;
               },
             ),
-            SizedBox(height: 10.0),
+            const SizedBox(height: 10.0),
             // Button to reset password
-            Container(
+            SizedBox(
               height: 50.0,
               child: TextButton(
                 onPressed: () {
                   _showNewPasswordDialog(context);
                 },
                 style: ButtonStyle(
-                  backgroundColor: MaterialStateProperty.all(Colors.white),
-                  shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                  backgroundColor: WidgetStateProperty.all(Colors.white),
+                  shape: WidgetStateProperty.all<RoundedRectangleBorder>(
                     RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(10.0),
-                      side: BorderSide(color: Colors.black),
+                      side: const BorderSide(color: Colors.black),
                     ),
                   ),
                 ),
-                child: Text(
+                child: const Text(
                   'Reset Password',
                   style: TextStyle(
                     color: Colors.black,
@@ -120,12 +122,12 @@ class ForgotPasswordPage extends StatelessWidget {
                 ),
               ),
             ),
-            SizedBox(height: 10.0),
+            const SizedBox(height: 10.0),
             TextButton(
               onPressed: () {
                 // Implement logic for resending code
               },
-              child: Text(
+              child: const Text(
                 'Resend Code?',
                 style: TextStyle(
                   color: Colors.black,
@@ -152,9 +154,9 @@ class ForgotPasswordPage extends StatelessWidget {
           title: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text('Enter Email'),
+              const Text('Enter Email'),
               IconButton(
-                icon: Icon(Icons.close),
+                icon: const Icon(Icons.close),
                 onPressed: () {
                   Navigator.of(context).pop();
                 },
@@ -184,7 +186,7 @@ class ForgotPasswordPage extends StatelessWidget {
                   _showSnackBar(context, 'A reset password code has been sent to ${emailController.text}');
                 }
               },
-              child: Text(
+              child: const Text(
                 'Submit',
                 style: TextStyle(
                   color: Colors.black,
@@ -211,9 +213,9 @@ class ForgotPasswordPage extends StatelessWidget {
           title: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text('Enter Phone Number'),
+              const Text('Enter Phone Number'),
               IconButton(
-                icon: Icon(Icons.close),
+                icon: const Icon(Icons.close),
                 onPressed: () {
                   Navigator.of(context).pop();
                 },
@@ -243,7 +245,7 @@ class ForgotPasswordPage extends StatelessWidget {
                   _showSnackBar(context, 'A reset password code has been sent to ${phoneController.text}');
                 }
               },
-              child: Text(
+              child: const Text(
                 'Submit',
                 style: TextStyle(
                   color: Colors.black,
@@ -268,7 +270,7 @@ class ForgotPasswordPage extends StatelessWidget {
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(20.0),
           ),
-          title: Text('Reset Password'),
+          title: const Text('Reset Password'),
           content: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
@@ -287,7 +289,7 @@ class ForgotPasswordPage extends StatelessWidget {
                   return null;
                 },
               ),
-              SizedBox(height: 10.0),
+              const SizedBox(height: 10.0),
               TextFormField(
                 controller: confirmPasswordController,
                 decoration: InputDecoration(
@@ -314,10 +316,10 @@ class ForgotPasswordPage extends StatelessWidget {
                   Navigator.of(context).pop();
                   _showSnackBar(context, 'Your password has been successfully reset!');
                   // Navigate back to login page
-                  Navigator.push(context, MaterialPageRoute(builder: (context) => LoginPage()));
+                  Navigator.push(context, MaterialPageRoute(builder: (context) => const LoginPage()));
                 }
               },
-              child: Text(
+              child: const Text(
                 'Confirm',
                 style: TextStyle(
                   color: Colors.black,

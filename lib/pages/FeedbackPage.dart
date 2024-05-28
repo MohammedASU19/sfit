@@ -5,7 +5,7 @@ import 'package:sfit/pages/Homepage.dart';
 class FeedbackPage extends StatefulWidget {
   final String coachName;
 
-  FeedbackPage({required this.coachName});
+  const FeedbackPage({super.key, required this.coachName});
 
   @override
   _FeedbackPageState createState() => _FeedbackPageState();
@@ -27,41 +27,41 @@ class _FeedbackPageState extends State<FeedbackPage> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Text(
+              const Text(
                 "Congratulations!",
                 style: TextStyle(
                   fontSize: 21.0,
                   fontWeight: FontWeight.bold,
                 ),
               ),
-              SizedBox(height: 5.0),
+              const SizedBox(height: 5.0),
               Container(
                 height: 1.0,
                 width: 800.0,
                 color: const Color.fromARGB(255, 120, 120, 120),
-                margin: EdgeInsets.symmetric(vertical: 10.0),
+                margin: const EdgeInsets.symmetric(vertical: 10.0),
               ),
-              Text(
+              const Text(
                 "How was your experience?",
                 style: TextStyle(
                   fontSize: 45.0,
                   fontWeight: FontWeight.bold,
                 ),
               ),
-              SizedBox(height: 50.0),
-              Text(
+              const SizedBox(height: 50.0),
+              const Text(
                 "Rate Your Experience",
                 style: TextStyle(
                   fontSize: 16.0,
                 ),
               ),
-              SizedBox(height: 20.0),
+              const SizedBox(height: 20.0),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   for (int i = 0; i < 5; i++)
                     Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 4.0),
+                      padding: const EdgeInsets.symmetric(horizontal: 4.0),
                       child: GestureDetector(
                         onTap: () {
                           setState(() {
@@ -71,7 +71,7 @@ class _FeedbackPageState extends State<FeedbackPage> {
                         child: Icon(
                           Icons.star,
                           color: i < selectedStars
-                              ? Color.fromARGB(255, 116, 220, 255)
+                              ? const Color.fromARGB(255, 116, 220, 255)
                               : Colors.grey,
                           size: 43.0,
                         ),
@@ -79,20 +79,20 @@ class _FeedbackPageState extends State<FeedbackPage> {
                     ),
                 ],
               ),
-              SizedBox(height: 50.0),
+              const SizedBox(height: 50.0),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 40.0),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(
+                    const Text(
                       "Tell us more about your experience",
                       style: TextStyle(
                         fontSize: 18.0,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-                    SizedBox(height: 10.0),
+                    const SizedBox(height: 10.0),
                     TextFormField(
                       onChanged: (value) {
                         feedback = value;
@@ -108,7 +108,7 @@ class _FeedbackPageState extends State<FeedbackPage> {
                   ],
                 ),
               ),
-              SizedBox(height: 30.0),
+              const SizedBox(height: 30.0),
               ElevatedButton(
                 onPressed: () async {
                   if (user != null) {
@@ -123,7 +123,7 @@ class _FeedbackPageState extends State<FeedbackPage> {
                     });
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => SportsCoachesPage(userDetails: {},)),
+                      MaterialPageRoute(builder: (context) => const SportsCoachesPage(userDetails: {},)),
                     );
                   }
                 },
@@ -132,9 +132,9 @@ class _FeedbackPageState extends State<FeedbackPage> {
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(10.0),
                   ),
-                  padding: EdgeInsets.symmetric(horizontal: 120.0, vertical: 18.0),
+                  padding: const EdgeInsets.symmetric(horizontal: 120.0, vertical: 18.0),
                 ),
-                child: Text(
+                child: const Text(
                   "Done!",
                   style: TextStyle(
                     fontSize: 16,

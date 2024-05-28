@@ -15,6 +15,8 @@ import 'package:sfit/pages/TraineeSignUpPage.dart';
 // }
 
 class ChooseDisabilityPage extends StatelessWidget {
+  const ChooseDisabilityPage({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -22,12 +24,12 @@ class ChooseDisabilityPage extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: Colors.white,
         leading: IconButton(
-          icon: Icon(Icons.arrow_back, color: Colors.black),
+          icon: const Icon(Icons.arrow_back, color: Colors.black),
           onPressed: () {
             Navigator.pop(context);
           },
         ),
-        title: Text(
+        title: const Text(
           "SportsConnect",
           style: TextStyle(
             color: Colors.black,
@@ -36,7 +38,7 @@ class ChooseDisabilityPage extends StatelessWidget {
         ),
         actions: <Widget>[
           IconButton(
-            icon: Icon(Icons.settings, color: Colors.black),
+            icon: const Icon(Icons.settings, color: Colors.black),
             onPressed: () {
               // Add your settings functionality here
             },
@@ -48,7 +50,7 @@ class ChooseDisabilityPage extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
-            Text(
+            const Text(
               "Choose what you have",
               style: TextStyle(
                 fontSize: 24,
@@ -56,9 +58,9 @@ class ChooseDisabilityPage extends StatelessWidget {
                 color: Colors.black,
               ),
             ),
-            SizedBox(height: 20),
-            Divider(color: Colors.grey),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
+            const Divider(color: Colors.grey),
+            const SizedBox(height: 20),
             Expanded(
               child: GridView.count(
                 crossAxisCount: 2,
@@ -75,7 +77,7 @@ class ChooseDisabilityPage extends StatelessWidget {
                 ],
               ),
             ),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             Align(
               alignment: Alignment.bottomRight,
               child: SizedBox(
@@ -84,18 +86,18 @@ class ChooseDisabilityPage extends StatelessWidget {
                 child: ElevatedButton(
                   onPressed: () {
                     // Add your next button functionality here
-                    Navigator.push(context,MaterialPageRoute(builder: (context) => SignUpPage()));
+                    Navigator.push(context,MaterialPageRoute(builder: (context) => const SignUpPage()));
                   },
-                  child: Text(
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.blue,
+                  ),
+                  child: const Text(
                     "Next",
                     style: TextStyle(
                       color: Colors.black,
                       fontWeight: FontWeight.bold, // Set text to bold
                       fontSize: 16, // Adjust text size
                     ),
-                  ),
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.blue,
                   ),
                 ),
               ),
@@ -122,10 +124,10 @@ class ChooseDisabilityPage extends StatelessWidget {
                 size: 40,
                 color: Colors.black,
               ),
-              SizedBox(height: 10),
+              const SizedBox(height: 10),
               Text(
                 text,
-                style: TextStyle(
+                style: const TextStyle(
                   fontSize: 16,
                   fontWeight: FontWeight.bold,
                   color: Colors.black,

@@ -3,12 +3,14 @@ import 'package:sfit/pages/GroupPlanPage.dart';
 import 'package:sfit/pages/FamilyPlanPage.dart';
 
 class SubscriptionPage extends StatelessWidget {
+  const SubscriptionPage({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
-        title: Text(
+        title: const Text(
           'SFIT Plans',
           style: TextStyle(fontWeight: FontWeight.bold, color: Colors.black),
         ),
@@ -21,7 +23,7 @@ class SubscriptionPage extends StatelessWidget {
             SubscriptionCard(
               title: 'Family Plan',
               price: '\$29.99/day',
-              features: [
+              features: const [
                 'Up to 5 family members',
                 '2 hours training session',
                 'Access to personal coach',
@@ -29,14 +31,14 @@ class SubscriptionPage extends StatelessWidget {
               onPressed: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => FamilyPlanPage()),
+                  MaterialPageRoute(builder: (context) => const FamilyPlanPage()),
                 );
               },
             ),
             SubscriptionCard(
               title: 'Group Plan',
               price: '\$49.99/day',
-              features: [
+              features: const [
                 'Up to 10 group members',
                 'Weekly team training sessions',
                 'Access to group coach',
@@ -44,7 +46,7 @@ class SubscriptionPage extends StatelessWidget {
               onPressed: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => GroupPlanPage()),
+                  MaterialPageRoute(builder: (context) => const GroupPlanPage()),
                 );
               },
             ),
@@ -57,19 +59,19 @@ class SubscriptionPage extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
             IconButton(
-              icon: Icon(Icons.home, color: Colors.lightBlue),
+              icon: const Icon(Icons.home, color: Colors.lightBlue),
               onPressed: () {},
             ),
             IconButton(
-              icon: Icon(Icons.search, color: Colors.black),
+              icon: const Icon(Icons.search, color: Colors.black),
               onPressed: () {},
             ),
             IconButton(
-              icon: Icon(Icons.favorite, color: Colors.black),
+              icon: const Icon(Icons.favorite, color: Colors.black),
               onPressed: () {},
             ),
             IconButton(
-              icon: Icon(Icons.account_circle, color: Colors.black),
+              icon: const Icon(Icons.account_circle, color: Colors.black),
               onPressed: () {},
             ),
           ],
@@ -85,7 +87,7 @@ class SubscriptionCard extends StatelessWidget {
   final List<String> features;
   final VoidCallback onPressed;
 
-  const SubscriptionCard({
+  const SubscriptionCard({super.key, 
     required this.title,
     required this.price,
     required this.features,
@@ -95,8 +97,8 @@ class SubscriptionCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.all(20.0),
-      padding: EdgeInsets.all(20.0),
+      margin: const EdgeInsets.all(20.0),
+      padding: const EdgeInsets.all(20.0),
       decoration: BoxDecoration(
         color: Colors.grey[200],
         borderRadius: BorderRadius.circular(10.0),
@@ -106,14 +108,14 @@ class SubscriptionCard extends StatelessWidget {
         children: [
           Text(
             title,
-            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 24, color: Colors.black),
+            style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 24, color: Colors.black),
           ),
-          SizedBox(height: 10.0),
+          const SizedBox(height: 10.0),
           Text(
             price,
-            style: TextStyle(fontSize: 20, color: Colors.black),
+            style: const TextStyle(fontSize: 20, color: Colors.black),
           ),
-          SizedBox(height: 10.0),
+          const SizedBox(height: 10.0),
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: features.map((feature) {
@@ -127,25 +129,25 @@ class SubscriptionCard extends StatelessWidget {
                       Icons.person,
                       color: Colors.black,
                     ),
-                    SizedBox(width: 10.0),
-                    Expanded(child: Text(feature, style: TextStyle(fontSize: 16, color: Colors.black))),
+                    const SizedBox(width: 10.0),
+                    Expanded(child: Text(feature, style: const TextStyle(fontSize: 16, color: Colors.black))),
                   ],
                 ),
               );
             }).toList(),
           ),
-          SizedBox(height: 10.0),
+          const SizedBox(height: 10.0),
           Center(
             child: ElevatedButton(
               onPressed: onPressed,
-              child: Text('Subscribe', style: TextStyle(fontSize: 16, color: Colors.black)),
               style: ElevatedButton.styleFrom(
                 backgroundColor: Colors.lightBlue,
-                padding: EdgeInsets.symmetric(horizontal: 50, vertical: 15),
+                padding: const EdgeInsets.symmetric(horizontal: 50, vertical: 15),
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(10.0),
                 ),
               ),
+              child: const Text('Subscribe', style: TextStyle(fontSize: 16, color: Colors.black)),
             ),
           ),
         ],

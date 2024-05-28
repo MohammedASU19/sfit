@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
 class ExperiencesPage extends StatelessWidget {
+  const ExperiencesPage({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -8,18 +10,18 @@ class ExperiencesPage extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: Colors.white, // Set background color of the app bar to white
         leading: IconButton(
-          icon: Icon(Icons.arrow_back, color: Colors.black), // Set back arrow color to black
+          icon: const Icon(Icons.arrow_back, color: Colors.black), // Set back arrow color to black
           onPressed: () {
             Navigator.pop(context);
           },
         ),
-        title: Text(
+        title: const Text(
           'Coach Experiences',
           style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold), // Set text color to black and bold
         ),
         centerTitle: true,
       ),
-      body: Center(
+      body: const Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
@@ -49,7 +51,7 @@ class ExperienceCard extends StatelessWidget {
   final String title;
   final String description;
 
-  const ExperienceCard({
+  const ExperienceCard({super.key, 
     required this.title,
     required this.description,
   });
@@ -58,7 +60,7 @@ class ExperienceCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Card(
       elevation: 4,
-      margin: EdgeInsets.symmetric(horizontal: 20),
+      margin: const EdgeInsets.symmetric(horizontal: 20),
       child: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
@@ -66,9 +68,9 @@ class ExperienceCard extends StatelessWidget {
           children: [
             Text(
               title,
-              style: TextStyle(fontWeight: FontWeight.bold),
+              style: const TextStyle(fontWeight: FontWeight.bold),
             ),
-            SizedBox(height: 8),
+            const SizedBox(height: 8),
             Text(description),
           ],
         ),

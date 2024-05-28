@@ -2,10 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:sfit/pages/FavoriteCoachesListPage.dart';
-import 'package:sfit/pages/SearchCoachPage.dart';
 import 'package:sfit/pages/Homepage.dart';
 
 class TraineeProfilePage extends StatefulWidget {
+  const TraineeProfilePage({super.key});
+
   @override
   _TraineeProfilePageState createState() => _TraineeProfilePageState();
 }
@@ -45,11 +46,11 @@ class _TraineeProfilePageState extends State<TraineeProfilePage> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.white,
-        title: Text(
+        title: const Text(
           'Trainee Profile',
           style: TextStyle(color: Colors.black),
         ),
-        iconTheme: IconThemeData(color: Colors.black),
+        iconTheme: const IconThemeData(color: Colors.black),
       ),
       body: Container(
         color: Colors.white,
@@ -62,7 +63,7 @@ class _TraineeProfilePageState extends State<TraineeProfilePage> {
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
                     // User Profile Section
-                    Container(
+                    SizedBox(
                       height: 200,
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
@@ -71,48 +72,48 @@ class _TraineeProfilePageState extends State<TraineeProfilePage> {
                             radius: 50,
                             backgroundImage: _userData.isNotEmpty && _userData['profileImageUrl'] != null
                                 ? NetworkImage(_userData['profileImageUrl'])
-                                : NetworkImage('https://cdn-icons-png.flaticon.com/512/177/177660.png'),
+                                : const NetworkImage('https://cdn-icons-png.flaticon.com/512/177/177660.png'),
                           ),
-                          SizedBox(height: 10),
+                          const SizedBox(height: 10),
                           Text(
                             _userData.isNotEmpty
                                 ? '${_userData['firstName']} ${_userData['lastName']}' // Display user's first and last name
                                 : 'User Name', // Placeholder text
-                            style: TextStyle(
+                            style: const TextStyle(
                               fontSize: 20,
                               fontWeight: FontWeight.bold,
                               color: Colors.black,
                             ),
                           ),
-                          SizedBox(height: 10),
+                          const SizedBox(height: 10),
                           // Display Username and Birthdate in blue boxes
                           Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               Container(
-                                padding: EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                                padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
                                 decoration: BoxDecoration(
                                   color: Colors.blue,
                                   borderRadius: BorderRadius.circular(20),
                                 ),
                                 child: Text(
                                   '@${_userData['username'] ?? 'Username'}',
-                                  style: TextStyle(
+                                  style: const TextStyle(
                                     color: Colors.white,
                                     fontWeight: FontWeight.bold,
                                   ),
                                 ),
                               ),
-                              SizedBox(width: 10),
+                              const SizedBox(width: 10),
                               Container(
-                                padding: EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                                padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
                                 decoration: BoxDecoration(
                                   color: Colors.blue,
                                   borderRadius: BorderRadius.circular(20),
                                 ),
                                 child: Text(
                                   '${_userData['day'] ?? 'Day'} ${_userData['month'] ?? 'Month'} ${_userData['year'] ?? 'Year'}',
-                                  style: TextStyle(
+                                  style: const TextStyle(
                                     color: Colors.white,
                                     fontWeight: FontWeight.bold,
                                   ),
@@ -123,7 +124,7 @@ class _TraineeProfilePageState extends State<TraineeProfilePage> {
                         ],
                       ),
                     ),
-                    SizedBox(height: 20),
+                    const SizedBox(height: 20),
                     // Edit Profile and Settings Section
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -139,7 +140,7 @@ class _TraineeProfilePageState extends State<TraineeProfilePage> {
                               borderRadius: BorderRadius.circular(28),
                               border: Border.all(color: Colors.grey),
                             ),
-                            child: Center(
+                            child: const Center(
                               child: Text(
                                 'Edit Profile',
                                 style: TextStyle(
@@ -149,7 +150,7 @@ class _TraineeProfilePageState extends State<TraineeProfilePage> {
                             ),
                           ),
                         ),
-                        SizedBox(width: 10),
+                        const SizedBox(width: 10),
                         GestureDetector(
                           onTap: () {
                             // Add functionality for navigating to settings
@@ -161,12 +162,12 @@ class _TraineeProfilePageState extends State<TraineeProfilePage> {
                               borderRadius: BorderRadius.circular(18),
                               border: Border.all(color: Colors.grey),
                             ),
-                            child: Icon(Icons.settings),
+                            child: const Icon(Icons.settings),
                           ),
                         ),
                       ],
                     ),
-                    SizedBox(height: 20),
+                    const SizedBox(height: 20),
                     // Other Sections (My Sessions, Notifications, Get Help, About App)
                     GestureDetector(
                       onTap: () {
@@ -175,8 +176,8 @@ class _TraineeProfilePageState extends State<TraineeProfilePage> {
                       child: Container(
                         height: 80,
                         color: Colors.grey[200],
-                        padding: EdgeInsets.symmetric(horizontal: 20),
-                        child: Row(
+                        padding: const EdgeInsets.symmetric(horizontal: 20),
+                        child: const Row(
                           children: [
                             Icon(Icons.event),
                             SizedBox(width: 10),
@@ -191,7 +192,7 @@ class _TraineeProfilePageState extends State<TraineeProfilePage> {
                         ),
                       ),
                     ),
-                    SizedBox(height: 20),
+                    const SizedBox(height: 20),
                     GestureDetector(
                       onTap: () {
                         // Add functionality for Notifications
@@ -199,8 +200,8 @@ class _TraineeProfilePageState extends State<TraineeProfilePage> {
                       child: Container(
                         height: 80,
                         color: Colors.grey[200],
-                        padding: EdgeInsets.symmetric(horizontal: 20),
-                        child: Row(
+                        padding: const EdgeInsets.symmetric(horizontal: 20),
+                        child: const Row(
                           children: [
                             Icon(Icons.notifications),
                             SizedBox(width: 10),
@@ -215,7 +216,7 @@ class _TraineeProfilePageState extends State<TraineeProfilePage> {
                         ),
                       ),
                     ),
-                    SizedBox(height: 20),
+                    const SizedBox(height: 20),
                     GestureDetector(
                       onTap: () {
                         // Add functionality for Get Help
@@ -223,8 +224,8 @@ class _TraineeProfilePageState extends State<TraineeProfilePage> {
                       child: Container(
                         height: 80,
                         color: Colors.grey[200],
-                        padding: EdgeInsets.symmetric(horizontal: 20),
-                        child: Row(
+                        padding: const EdgeInsets.symmetric(horizontal: 20),
+                        child: const Row(
                           children: [
                             Icon(Icons.sports_soccer),
                             SizedBox(width: 10),
@@ -239,7 +240,7 @@ class _TraineeProfilePageState extends State<TraineeProfilePage> {
                         ),
                       ),
                     ),
-                    SizedBox(height: 20),
+                    const SizedBox(height: 20),
                     GestureDetector(
                       onTap: () {
                         // Add functionality for About App
@@ -247,8 +248,8 @@ class _TraineeProfilePageState extends State<TraineeProfilePage> {
                       child: Container(
                         height: 80,
                         color: Colors.grey[200],
-                        padding: EdgeInsets.symmetric(horizontal: 20),
-                        child: Row(
+                        padding: const EdgeInsets.symmetric(horizontal: 20),
+                        child: const Row(
                           children: [
                             Icon(Icons.help),
                             SizedBox(width: 10),
@@ -276,35 +277,36 @@ class _TraineeProfilePageState extends State<TraineeProfilePage> {
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: <Widget>[
             IconButton(
-              icon: Icon(Icons.home, size: 30),
-              color: const Color.fromARGB(255, 44, 184, 249),
+              icon: const Icon(Icons.home, size: 30),
+              color: const Color.fromARGB(255, 0, 0, 0),
               onPressed: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => SportsCoachesPage(userDetails: {},)),
+                  MaterialPageRoute(builder: (context) => const SportsCoachesPage(userDetails: {},)),
                 );
               },
             ),
             IconButton(
-              icon: Icon(Icons.search, size: 30),
+              icon: const Icon(Icons.search, size: 30),
               onPressed: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => SportsCoachesPage(userDetails: {},)),
+                  MaterialPageRoute(builder: (context) => const SportsCoachesPage(userDetails: {},)),
                 );
               },
             ),
             IconButton(
-              icon: Icon(Icons.favorite, size: 30),
+              icon: const Icon(Icons.favorite, size: 30),
               onPressed: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => FavoriteCoaches(title: 'Favorite Coaches')),
+                  MaterialPageRoute(builder: (context) => const FavoriteCoaches(title: 'Favorite Coaches')),
                 );
               },
             ),
             IconButton(
-              icon: Icon(Icons.person, size: 30),
+              icon: const Icon(Icons.person, size: 30),
+              color: const Color.fromARGB(255, 94, 204, 255),
               onPressed: () {
                 // No need to navigate to TraineeProfilePage since we are already on it
               },

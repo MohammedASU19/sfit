@@ -8,7 +8,7 @@ import 'package:location_picker_flutter_map/location_picker_flutter_map.dart';
 class PaymentPage extends StatefulWidget {
   final String coachName;
 
-  PaymentPage({required this.coachName});
+  const PaymentPage({super.key, required this.coachName});
 
   @override
   _PaymentPageState createState() => _PaymentPageState();
@@ -29,12 +29,12 @@ class _PaymentPageState extends State<PaymentPage> {
       appBar: AppBar(
         backgroundColor: Colors.white,
         leading: IconButton(
-          icon: Icon(Icons.arrow_back),
+          icon: const Icon(Icons.arrow_back),
           onPressed: () {
             Navigator.pop(context);
           },
         ),
-        title: Text('Coach'),
+        title: const Text('Coach'),
       ),
       body: SingleChildScrollView(
         child: Column(
@@ -44,13 +44,13 @@ class _PaymentPageState extends State<PaymentPage> {
               padding: const EdgeInsets.all(8.0),
               child: Text(
                 'Coach: ${widget.coachName}',
-                style: TextStyle(
+                style: const TextStyle(
                   fontSize: 20,
                   fontWeight: FontWeight.bold,
                 ),
               ),
             ),
-            Divider(
+            const Divider(
               color: Colors.grey,
               thickness: 1,
             ),
@@ -59,7 +59,7 @@ class _PaymentPageState extends State<PaymentPage> {
                 LatLng? result = await Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => LocationPicker(),
+                    builder: (context) => const LocationPicker(),
                   ),
                 );
 
@@ -71,7 +71,7 @@ class _PaymentPageState extends State<PaymentPage> {
               },
               child: Container(
                 height: 180,
-                margin: EdgeInsets.symmetric(horizontal: 16),
+                margin: const EdgeInsets.symmetric(horizontal: 16),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(25),
                   border: Border.all(color: Colors.grey),
@@ -87,13 +87,13 @@ class _PaymentPageState extends State<PaymentPage> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Icon(Icons.location_on, color: Colors.white),
-                    SizedBox(width: 8),
+                    const Icon(Icons.location_on, color: Colors.white),
+                    const SizedBox(width: 8),
                     Text(
                       selectedLocation == null
                           ? 'Pick a Location'
                           : 'Location: ${selectedLocation!.latitude}, ${selectedLocation!.longitude}',
-                      style: TextStyle(
+                      style: const TextStyle(
                         color: Colors.white,
                         fontWeight: FontWeight.bold,
                       ),
@@ -102,12 +102,12 @@ class _PaymentPageState extends State<PaymentPage> {
                 ),
               ),
             ),
-            Divider(
+            const Divider(
               color: Colors.grey,
               thickness: 1,
             ),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
+            const Padding(
+              padding: EdgeInsets.all(8.0),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -128,9 +128,9 @@ class _PaymentPageState extends State<PaymentPage> {
                 ],
               ),
             ),
-            SizedBox(height: 24), // Increased space below "Session Subtotal"
+            const SizedBox(height: 24), // Increased space below "Session Subtotal"
             CheckboxListTile(
-              title: Row(
+              title: const Row(
                 children: [
                   Icon(Icons.credit_card),
                   SizedBox(width: 8),
@@ -148,7 +148,7 @@ class _PaymentPageState extends State<PaymentPage> {
               },
             ),
             CheckboxListTile(
-              title: Row(
+              title: const Row(
                 children: [
                   Icon(Icons.money),
                   SizedBox(width: 8),
@@ -180,17 +180,17 @@ class _PaymentPageState extends State<PaymentPage> {
       );
     }
   },
-  child: Padding(
-    padding: const EdgeInsets.all(16.0),
+  style: ElevatedButton.styleFrom(
+    backgroundColor: Colors.lightBlue,
+  ),
+  child: const Padding(
+    padding: EdgeInsets.all(16.0),
     child: Text(
       'Pay Now',
       style: TextStyle(
         fontSize: 20,
       ),
     ),
-  ),
-  style: ElevatedButton.styleFrom(
-    backgroundColor: Colors.lightBlue,
   ),
 ),
 
@@ -204,7 +204,7 @@ Future<void> _showVisaPaymentDialog(BuildContext context) async {
     context: context,
     builder: (BuildContext context) {
       return AlertDialog(
-        title: Text('Enter Credit Card Information'),
+        title: const Text('Enter Credit Card Information'),
         content: Form(
           key: formKey,
           child: Column(
@@ -213,7 +213,7 @@ Future<void> _showVisaPaymentDialog(BuildContext context) async {
               TextFormField(
                 controller: cardNumberController,
                 keyboardType: TextInputType.number,
-                decoration: InputDecoration(labelText: 'Credit Card Number'),
+                decoration: const InputDecoration(labelText: 'Credit Card Number'),
                 validator: (value) {
                   if (value == null || value.isEmpty) {
                     return 'Please enter credit card number';
@@ -224,7 +224,7 @@ Future<void> _showVisaPaymentDialog(BuildContext context) async {
               TextFormField(
                 controller: expDateController,
                 keyboardType: TextInputType.datetime,
-                decoration: InputDecoration(labelText: 'Exp Date'),
+                decoration: const InputDecoration(labelText: 'Exp Date'),
                 validator: (value) {
                   if (value == null || value.isEmpty) {
                     return 'Please enter expiration date';
@@ -235,7 +235,7 @@ Future<void> _showVisaPaymentDialog(BuildContext context) async {
               TextFormField(
                 controller: cvvController,
                 keyboardType: TextInputType.number,
-                decoration: InputDecoration(labelText: 'CVV'),
+                decoration: const InputDecoration(labelText: 'CVV'),
                 validator: (value) {
                   if (value == null || value.isEmpty) {
                     return 'Please enter CVV';
@@ -251,7 +251,7 @@ Future<void> _showVisaPaymentDialog(BuildContext context) async {
             onPressed: () {
               Navigator.of(context).pop();
             },
-            child: Text('Cancel'),
+            child: const Text('Cancel'),
           ),
           TextButton(
             onPressed: () {
@@ -266,7 +266,7 @@ Future<void> _showVisaPaymentDialog(BuildContext context) async {
                 );
               }
             },
-            child: Text('Submit'),
+            child: const Text('Submit'),
           ),
         ],
       );
@@ -305,11 +305,13 @@ void _storeTransactionDetails() {
 }
 
 class LocationPicker extends StatelessWidget {
+  const LocationPicker({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Pick Location'),
+        title: const Text('Pick Location'),
       ),
       body: FlutterLocationPicker(
         initZoom: 16,

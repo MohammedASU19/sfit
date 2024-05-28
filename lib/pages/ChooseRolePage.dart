@@ -4,6 +4,8 @@ import 'package:sfit/pages/TraineeSignUpPage.dart';
 import 'package:sfit/pages/LoginPage.dart';
 
 class ChooseRolePage extends StatefulWidget {
+  const ChooseRolePage({super.key});
+
   @override
   _ChooseRolePageState createState() => _ChooseRolePageState();
 }
@@ -19,23 +21,23 @@ class _ChooseRolePageState extends State<ChooseRolePage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            CircleAvatar(
+            const CircleAvatar(
               radius: 80.0,
               backgroundImage: NetworkImage(
                   'https://assets-global.website-files.com/57822c659e1627a433e6a7c6/5f8011d3b0cad53a62d51710_5e4125fce8a6bf3c81feeb9d_Personal%2520Trainer.png'),
             ),
-            SizedBox(height: 20.0),
-            Text(
+            const SizedBox(height: 20.0),
+            const Text(
               "Choose Your Role",
               style: TextStyle(
                 fontSize: 24.0,
                 fontWeight: FontWeight.bold,
               ),
             ),
-            SizedBox(height: 50.0), // Added space here
+            const SizedBox(height: 50.0), // Added space here
             Container(
               width: 400.0, // Set the width of the container
-              padding: EdgeInsets.symmetric(horizontal: 16.0),
+              padding: const EdgeInsets.symmetric(horizontal: 16.0),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(10.0),
                 border: Border.all(color: Colors.lightBlue),
@@ -55,36 +57,36 @@ class _ChooseRolePageState extends State<ChooseRolePage> {
                     value: value,
                     child: Text(
                       value,
-                      style: TextStyle(color: Colors.black),
+                      style: const TextStyle(color: Colors.black),
                     ),
                   );
                 }).toList(),
                 underline: Container(), // Remove the default underline
                 isExpanded: true, // Make the dropdown button fill the width of its parent
-                icon: Icon(Icons.keyboard_arrow_down),
+                icon: const Icon(Icons.keyboard_arrow_down),
                 iconSize: 22.0,
                 iconEnabledColor: Colors.black,
-                hint: Text('Select', style: TextStyle(color: Colors.black)),
-                style: TextStyle(
+                hint: const Text('Select', style: TextStyle(color: Colors.black)),
+                style: const TextStyle(
                   fontSize: 18.0,
                   color: Colors.black,
                 ),
                 dropdownColor: Colors.white, // Set the background color of the dropdown menu
               ),
             ),
-            SizedBox(height: 60.0), // Added space here
+            const SizedBox(height: 60.0), // Added space here
             ElevatedButton(
               onPressed: () {
                 // Check the selected role and navigate accordingly
                 if (selectedRole == 'Trainee') {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => SignUpPage()),
+                    MaterialPageRoute(builder: (context) => const SignUpPage()),
                   );
                 } else if (selectedRole == 'Coach') {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => CoachSignUpPage()),
+                    MaterialPageRoute(builder: (context) => const CoachSignUpPage()),
                   );
                 } else {
                   // Do nothing if the role is 'Select'
@@ -96,9 +98,9 @@ class _ChooseRolePageState extends State<ChooseRolePage> {
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(10.0),
                 ),
-                padding: EdgeInsets.symmetric(horizontal: 30.0, vertical: 18.0),
+                padding: const EdgeInsets.symmetric(horizontal: 30.0, vertical: 18.0),
               ),
-              child: Text(
+              child: const Text(
                 "Sign Up",
                 style: TextStyle(
                   color: Colors.black,
@@ -106,15 +108,15 @@ class _ChooseRolePageState extends State<ChooseRolePage> {
                 ),
               ),
             ),
-            SizedBox(height: 20.0), // Add space between the button and the login text
+            const SizedBox(height: 20.0), // Add space between the button and the login text
             GestureDetector(
               onTap: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => LoginPage()),
+                  MaterialPageRoute(builder: (context) => const LoginPage()),
                 );
               },
-              child: Row(
+              child: const Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
