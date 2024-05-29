@@ -99,7 +99,7 @@ class IntroductionPage extends StatelessWidget {
                     Image.asset(
                       'lib/images/Intro.png',
                       width: double.infinity,
-                      height: 200.0,
+                      height: 110.0,
                       fit: BoxFit.cover,
                     ),
                   ],
@@ -156,7 +156,7 @@ class IntroductionPage extends StatelessWidget {
                           decoration: const BoxDecoration(
                             shape: BoxShape.circle,
                             image: DecorationImage(
-                              image: NetworkImage('https://t3.ftcdn.net/jpg/02/78/42/76/360_F_278427683_zeS9ihPAO61QhHqdU1fOaPk2UClfgPcW.jpg'),
+                              image: AssetImage('lib/images/Oqaily.png'),
                               fit: BoxFit.cover,
                             ),
                           ),

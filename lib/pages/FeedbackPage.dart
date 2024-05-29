@@ -146,7 +146,7 @@ class _FeedbackPageState extends State<FeedbackPage> {
                   }
                 },
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.blue,
+                  backgroundColor:const Color.fromARGB(255, 94, 204, 255),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(10.0),
                   ),

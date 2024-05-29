@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:sfit/pages/SearchCoachPage.dart';
+
 class FilterPage extends StatefulWidget {
   const FilterPage({super.key});
 
@@ -42,7 +43,6 @@ class _FilterPageState extends State<FilterPage> {
           children: [
             const SizedBox(height: 20),
             Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 const Text(
                   "Filter by:",
@@ -53,16 +53,19 @@ class _FilterPageState extends State<FilterPage> {
                 ),
                 const SizedBox(width: 20), // Add spacing between Filter by text and options
                 Expanded(
-                  child: Row(
-                    children: [
-                      buildFilterOption("Experience"),
-                      const SizedBox(width: 10),
-                      buildFilterOption("Available now"),
-                      const SizedBox(width: 10),
-                      buildFilterOption("Active"),
-                      const SizedBox(width: 10),
-                      buildFilterOption("Highly Rated"),
-                    ],
+                  child: SingleChildScrollView(
+                    scrollDirection: Axis.horizontal,
+                    child: Row(
+                      children: [
+                        buildFilterOption("Experience"),
+                        const SizedBox(width: 10),
+                        buildFilterOption("Available now"),
+                        const SizedBox(width: 10),
+                        buildFilterOption("Active"),
+                        const SizedBox(width: 10),
+                        buildFilterOption("Highly Rated"),
+                      ],
+                    ),
                   ),
                 ),
               ],
@@ -88,14 +91,14 @@ class _FilterPageState extends State<FilterPage> {
                     value: priceRange,
                     min: 10,
                     max: 100,
-                    divisions: 3,
+                    divisions: 9,
                     onChanged: (value) {
                       setState(() {
                         priceRange = value;
                       });
                     },
                     label: '${priceRange.toStringAsFixed(0)}\$', // Display price value
-                    activeColor: Colors.blue, // Set price range line color to blue
+                    activeColor: const Color.fromARGB(255, 94, 204, 255), // Set price range line color to blue
                   ),
                 ),
                 const Text(
@@ -109,11 +112,11 @@ class _FilterPageState extends State<FilterPage> {
               child: ElevatedButton(
                 onPressed: () {
                   // Add logic to apply filters
-                   Navigator.push(
-                    context,MaterialPageRoute(builder: (context) => const SearchCoachesPage()));
+                  Navigator.push(
+                    context, MaterialPageRoute(builder: (context) => const SearchCoachesPage()));
                 },
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.blue,
+                  backgroundColor: const Color.fromARGB(255, 94, 204, 255),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(10.0),
                   ),
@@ -146,7 +149,7 @@ class _FilterPageState extends State<FilterPage> {
       child: Container(
         padding: const EdgeInsets.all(10),
         decoration: BoxDecoration(
-          color: isSelected ? Colors.blue : Colors.white,
+          color: isSelected ? const Color.fromARGB(255, 94, 204, 255) : Colors.white,
           borderRadius: BorderRadius.circular(10),
           border: Border.all(color: Colors.black),
         ),

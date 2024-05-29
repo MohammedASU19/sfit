@@ -25,11 +25,15 @@ class PaymentPage extends StatefulWidget {
 
 class _PaymentPageState extends State<PaymentPage> {
   String? paymentOption;
+  TextEditingController cardHolderNameController = TextEditingController();
   TextEditingController cardNumberController = TextEditingController();
   TextEditingController expDateController = TextEditingController();
   TextEditingController cvvController = TextEditingController();
   GlobalKey<FormState> formKey = GlobalKey<FormState>();
   LatLng? selectedLocation;
+  bool isCardDetailsConfirmed = false;
+  String _selectedMonth = '06';
+  String _selectedYear = '24';
 
   @override
   Widget build(BuildContext context) {
@@ -78,7 +82,8 @@ class _PaymentPageState extends State<PaymentPage> {
                 }
               },
               child: Container(
-                height: 180,
+                height: 270,
+                width: 110,
                 margin: const EdgeInsets.symmetric(horizontal: 16),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(25),
@@ -138,6 +143,7 @@ class _PaymentPageState extends State<PaymentPage> {
                     onChanged: (value) {
                       setState(() {
                         paymentOption = value;
+                        isCardDetailsConfirmed = false;
                       });
                     },
                   ),
@@ -202,17 +208,16 @@ class _PaymentPageState extends State<PaymentPage> {
               child: ElevatedButton(
                 onPressed: () {
                   if (paymentOption == 'Visa') {
-                    if (formKey.currentState != null && formKey.currentState!.validate()) {
-                      _showVisaPaymentDialog(context);
+                    if (isCardDetailsConfirmed) {
+                      _storeTransactionDetails(
+                        context,
+                        cardHolderNameController.text,
+                        cardNumberController.text,
+                        '$_selectedMonth/$_selectedYear',
+                      );
                     }
-                  } else {
-                    _storeTransactionDetails();
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => FeedbackPage(coachName: widget.coachName),
-                      ),
-                    );
+                  } else if (paymentOption == 'Cash') {
+                    _storeTransactionDetails(context, null, null, null);
                   }
                 },
                 style: ElevatedButton.styleFrom(
@@ -244,12 +249,28 @@ class _PaymentPageState extends State<PaymentPage> {
       builder: (BuildContext context) {
         return AlertDialog(
           backgroundColor: Colors.white,
-          title: const Text('Enter Credit Card Information'),
+          title: Row(
+            children: const [
+              Icon(Icons.credit_card),
+              SizedBox(width: 8),
+              Text('Enter Card Details'),
+            ],
+          ),
           content: Form(
             key: formKey,
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: <Widget>[
+                TextFormField(
+                  controller: cardHolderNameController,
+                  decoration: const InputDecoration(labelText: 'Card Holder Name'),
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return 'Please enter the card holder name';
+                    }
+                    return null;
+                  },
+                ),
                 TextFormField(
                   controller: cardNumberController,
                   keyboardType: TextInputType.number,
@@ -261,16 +282,42 @@ class _PaymentPageState extends State<PaymentPage> {
                     return null;
                   },
                 ),
-                TextFormField(
-                  controller: expDateController,
-                  keyboardType: TextInputType.datetime,
-                  decoration: const InputDecoration(labelText: 'Exp Date'),
-                  validator: (value) {
-                    if (value == null || value.isEmpty) {
-                      return 'Please enter expiration date';
-                    }
-                    return null;
-                  },
+                Row(
+                  children: [
+                    Expanded(
+                      child: DropdownButtonFormField<String>(
+                        decoration: const InputDecoration(labelText: 'Expiry Month'),
+                        value: _selectedMonth,
+                        items: List.generate(12, (index) {
+                          final month = (index + 1).toString().padLeft(2, '0');
+                          return DropdownMenuItem(
+                            value: month,
+                            child: Text(month),
+                          );
+                        }),
+                        onChanged: (value) {
+                          _selectedMonth = value!;
+                        },
+                      ),
+                    ),
+                    const SizedBox(width: 10),
+                    Expanded(
+                      child: DropdownButtonFormField<String>(
+                        decoration: const InputDecoration(labelText: 'Expiry Year'),
+                        value: _selectedYear,
+                        items: List.generate(10, (index) {
+                          final year = (index + 23).toString();
+                          return DropdownMenuItem(
+                            value: year,
+                            child: Text(year),
+                          );
+                        }),
+                        onChanged: (value) {
+                          _selectedYear = value!;
+                        },
+                      ),
+                    ),
+                  ],
                 ),
                 TextFormField(
                   controller: cvvController,
@@ -299,21 +346,20 @@ class _PaymentPageState extends State<PaymentPage> {
                 ),
               ),
             ),
-            TextButton(
+            ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                backgroundColor: const Color.fromARGB(255, 94, 204, 255),
+              ),
               onPressed: () {
-                if (formKey.currentState != null && formKey.currentState!.validate()) {
-                  Navigator.of(context).pop(); // Close the dialog
-                  _storeTransactionDetails(); // Store transaction details
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => FeedbackPage(coachName: widget.coachName),
-                    ),
-                  );
+                if (formKey.currentState!.validate()) {
+                  setState(() {
+                    isCardDetailsConfirmed = true;
+                  });
+                  Navigator.of(context).pop();
                 }
               },
               child: const Text(
-                'Submit',
+                'Confirm',
                 style: TextStyle(
                   color: Colors.black,
                   fontWeight: FontWeight.bold,
@@ -326,7 +372,7 @@ class _PaymentPageState extends State<PaymentPage> {
     );
   }
 
-  void _storeTransactionDetails() async {
+  void _storeTransactionDetails(BuildContext context, String? cardHolderName, String? cardNumber, String? expDate) async {
     try {
       String userEmail = FirebaseAuth.instance.currentUser!.email!;
       String? username = FirebaseAuth.instance.currentUser!.displayName;
@@ -340,7 +386,7 @@ class _PaymentPageState extends State<PaymentPage> {
 
       String paymentOptionText = paymentOption == 'Visa' ? 'Visa' : 'Cash';
       String maskedCardNumber = paymentOption == 'Visa'
-          ? '**** **** **** ${cardNumberController.text.substring(cardNumberController.text.length - 4)}'
+          ? '**** **** **** ${cardNumber?.substring(cardNumber.length - 4)}'
           : 'N/A';
 
       DateTime now = DateTime.now();
@@ -365,6 +411,8 @@ class _PaymentPageState extends State<PaymentPage> {
         'sessionStartTime': sessionStartTime.toIso8601String(),
         'sessionEndTime': sessionEndTime.toIso8601String(),
         'location': location,
+        'cardHolderName': cardHolderName != null ? '${cardHolderName[0]}*****${cardHolderName.substring(cardHolderName.length - 5)}' : 'N/A',
+        'subscription_exp_date': now.add(const Duration(days: 30)).toIso8601String(),
       });
 
       Navigator.pushReplacement(

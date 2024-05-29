@@ -59,7 +59,7 @@ class SubscriptionPage extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
             IconButton(
-              icon: const Icon(Icons.home, color: Colors.lightBlue),
+              icon: const Icon(Icons.home, color: Color.fromARGB(255, 94, 204, 255),),
               onPressed: () {},
             ),
             IconButton(
@@ -141,13 +141,13 @@ class SubscriptionCard extends StatelessWidget {
             child: ElevatedButton(
               onPressed: onPressed,
               style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.lightBlue,
+                backgroundColor: Color.fromARGB(255, 94, 204, 255),
                 padding: const EdgeInsets.symmetric(horizontal: 50, vertical: 15),
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(10.0),
                 ),
               ),
-              child: const Text('Subscribe', style: TextStyle(fontSize: 16, color: Colors.black)),
+              child: const Text('Subscribe', style: TextStyle(fontSize: 16, color: Colors.black, fontWeight: FontWeight.bold)),
             ),
           ),
         ],
