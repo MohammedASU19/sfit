@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:sfit/pages/FavoriteCoachesListPage.dart';
+import 'package:sfit/pages/GetHelp.dart';
 import 'package:sfit/pages/Homepage.dart';
+import 'package:sfit/pages/MySubscriptions.dart';
 import 'package:sfit/pages/Sessions.dart';
 
 class TraineeProfilePage extends StatefulWidget {
@@ -127,46 +129,50 @@ class _TraineeProfilePageState extends State<TraineeProfilePage> {
                     ),
                     const SizedBox(height: 20),
                     // Edit Profile and Settings Section
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        GestureDetector(
-                          onTap: () {
-                            // Add functionality for editing profile
-                          },
-                          child: Container(
-                            height: 50,
-                            width: 330,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(28),
-                              border: Border.all(color: Colors.grey),
-                            ),
-                            child: const Center(
-                              child: Text(
-                                'Edit Profile',
-                                style: TextStyle(
-                                  fontWeight: FontWeight.bold,
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 20),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Expanded(
+                            child: GestureDetector(
+                              onTap: () {
+                                // Add functionality for editing profile
+                              },
+                              child: Container(
+                                height: 50,
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(28),
+                                  border: Border.all(color: Colors.grey),
+                                ),
+                                child: Center(
+                                  child: Text(
+                                    'Edit Profile',
+                                    style: const TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
                                 ),
                               ),
                             ),
                           ),
-                        ),
-                        const SizedBox(width: 10),
-                        GestureDetector(
-                          onTap: () {
-                            // Add functionality for navigating to settings
-                          },
-                          child: Container(
-                            height: 50,
-                            width: 50,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(18),
-                              border: Border.all(color: Colors.grey),
+                          const SizedBox(width: 10),
+                          GestureDetector(
+                            onTap: () {
+                              // Add functionality for navigating to settings
+                            },
+                            child: Container(
+                              height: 50,
+                              width: 50,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(18),
+                                border: Border.all(color: Colors.grey),
+                              ),
+                              child: const Icon(Icons.settings),
                             ),
-                            child: const Icon(Icons.settings),
                           ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
                     const SizedBox(height: 20),
                     // Other Sections (My Sessions, Notifications, Get Help, About App)
@@ -201,7 +207,11 @@ class _TraineeProfilePageState extends State<TraineeProfilePage> {
                     const SizedBox(height: 20),
                     GestureDetector(
                       onTap: () {
-                        // Add functionality for Notifications
+                        {
+              Navigator.push(context, MaterialPageRoute(builder: (context) => MySubscriptionsPage()));
+              // Handle Subscriptions tap
+            }
+                        // Add functionality for Subscriptions
                       },
                       child: Container(
                         height: 80,
@@ -209,10 +219,10 @@ class _TraineeProfilePageState extends State<TraineeProfilePage> {
                         padding: const EdgeInsets.symmetric(horizontal: 20),
                         child: const Row(
                           children: [
-                            Icon(Icons.notifications),
+                            Icon(Icons.credit_card_rounded),
                             SizedBox(width: 10),
                             Text(
-                              'Notifications',
+                              'My Subscriptions',
                               style: TextStyle(
                                 fontWeight: FontWeight.bold,
                                 fontSize: 16,
@@ -225,7 +235,12 @@ class _TraineeProfilePageState extends State<TraineeProfilePage> {
                     const SizedBox(height: 20),
                     GestureDetector(
                       onTap: () {
-                        // Add functionality for Get Help
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => GetHelpPage(),
+                          ),
+                        );
                       },
                       child: Container(
                         height: 80,
@@ -233,7 +248,7 @@ class _TraineeProfilePageState extends State<TraineeProfilePage> {
                         padding: const EdgeInsets.symmetric(horizontal: 20),
                         child: const Row(
                           children: [
-                            Icon(Icons.sports_soccer),
+                            Icon(Icons.support_agent_rounded),
                             SizedBox(width: 10),
                             Text(
                               'Get Help',
@@ -270,6 +285,7 @@ class _TraineeProfilePageState extends State<TraineeProfilePage> {
                         ),
                       ),
                     ),
+                    const SizedBox(height: 20),
                   ],
                 ),
               ),
@@ -288,7 +304,7 @@ class _TraineeProfilePageState extends State<TraineeProfilePage> {
               onPressed: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => const SportsCoachesPage(userDetails: {},)),
+                  MaterialPageRoute(builder: (context) => const SportsCoachesPage(userDetails: {})),
                 );
               },
             ),
@@ -297,7 +313,7 @@ class _TraineeProfilePageState extends State<TraineeProfilePage> {
               onPressed: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => const SportsCoachesPage(userDetails: {},)),
+                  MaterialPageRoute(builder: (context) => const SportsCoachesPage(userDetails: {})),
                 );
               },
             ),

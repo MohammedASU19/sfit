@@ -4,7 +4,9 @@ import 'package:firebase_database/firebase_database.dart';
 import 'package:intl/intl.dart';
 
 class CoachProfilePage extends StatefulWidget {
-  const CoachProfilePage({super.key, required Map<String, dynamic> userDetails});
+  const CoachProfilePage({Key? key, required this.userDetails}) : super(key: key);
+
+  final Map<String, dynamic> userDetails;
 
   @override
   _CoachProfilePageState createState() => _CoachProfilePageState();
@@ -81,7 +83,8 @@ class _CoachProfilePageState extends State<CoachProfilePage> {
               height: 200,
               decoration: const BoxDecoration(
                 image: DecorationImage(
-                  image: NetworkImage('https://www.britishparatabletennis.com/cdn/shop/articles/newcoach_1000x.png?v=1623150313'),
+                  image: NetworkImage(
+                      'https://www.britishparatabletennis.com/cdn/shop/articles/newcoach_1000x.png?v=1623150313'),
                   fit: BoxFit.cover,
                 ),
               ),
@@ -94,7 +97,8 @@ class _CoachProfilePageState extends State<CoachProfilePage> {
                       radius: 50,
                       backgroundImage: _userData.isNotEmpty && _userData['profileImageUrl'] != null
                           ? NetworkImage(_userData['profileImageUrl'])
-                          : const NetworkImage('https://cdn-icons-png.flaticon.com/512/2585/2585583.png'),
+                          : const NetworkImage(
+                          'https://cdn-icons-png.flaticon.com/512/2585/2585583.png'),
                     ),
                   ),
                 ],
@@ -146,38 +150,28 @@ class _CoachProfilePageState extends State<CoachProfilePage> {
                           ),
                         ),
                       ),
-                      if (_contactDetailsVisible) ...[
-                        const SizedBox(width: 10),
-                        Container(
+                      const SizedBox(width: 10),
+                      GestureDetector(
+                        onTap: () {
+                          setState(() {
+                            _contactDetailsVisible = !_contactDetailsVisible;
+                          });
+                        },
+                        child: Container(
                           padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
                           decoration: BoxDecoration(
                             color: Colors.blue,
                             borderRadius: BorderRadius.circular(20),
                           ),
-                          child: Text(
-                            'Email: ${_userData['email'] ?? 'Email'}',
-                            style: const TextStyle(
+                          child: const Text(
+                            'Contact Details',
+                            style: TextStyle(
                               color: Colors.white,
                               fontWeight: FontWeight.bold,
                             ),
                           ),
                         ),
-                        const SizedBox(width: 10),
-                        Container(
-                          padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
-                          decoration: BoxDecoration(
-                            color: Colors.blue,
-                            borderRadius: BorderRadius.circular(20),
-                          ),
-                          child: Text(
-                            'Phone: ${_userData['phone_number'] ?? 'Phone Number'}',
-                            style: const TextStyle(
-                              color: Colors.white,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                        ),
-                      ],
+                      ),
                     ],
                   ),
                   const SizedBox(height: 10),
@@ -188,54 +182,41 @@ class _CoachProfilePageState extends State<CoachProfilePage> {
                       color: Color.fromARGB(255, 138, 138, 138),
                     ),
                   ),
-                ],
-              ),
-            ),
-            const SizedBox(height: 20),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                GestureDetector(
-                  onTap: () {
-                    setState(() {
-                      _contactDetailsVisible = !_contactDetailsVisible;
-                    });
-                  },
-                  child: Container(
-                    height: 50,
-                    width: 300,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(16),
-                      border: Border.all(color: Colors.grey),
-                    ),
-                    child: const Center(
+                  if (_contactDetailsVisible) ...[
+                    const SizedBox(height: 10),
+                    Container(
+                      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                      decoration: BoxDecoration(
+                        color: Colors.blue,
+                        borderRadius: BorderRadius.circular(20),
+                      ),
                       child: Text(
-                        'Contact Details',
-                        style: TextStyle(
+                        'Email: ${_userData['email'] ?? 'Email'}',
+                        style: const TextStyle(
+                          color: Colors.white,
                           fontWeight: FontWeight.bold,
                         ),
                       ),
                     ),
-                  ),
-                ),
-                const SizedBox(width: 10),
-                GestureDetector(
-                  onTap: () {
-                    // Add functionality for settings
-                  },
-                  child: Container(
-                    height: 50,
-                    width: 50,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(16),
-                      border: Border.all(color: Colors.grey),
+                    const SizedBox(height: 10),
+                    Container(
+                      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                      decoration: BoxDecoration(
+                        color: Colors.blue,
+                        borderRadius: BorderRadius.circular(20),
+                      ),
+                      child: Text(
+                        'Phone: ${_userData['phone_number'] ?? 'Phone Number'}',
+                        style: const TextStyle(
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
                     ),
-                    child: const Icon(Icons.settings),
-                  ),
-                ),
-              ],
+                  ],
+                ],
+              ),
             ),
-            const SizedBox(height: 20),
             const SizedBox(height: 20),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -281,7 +262,7 @@ class _CoachProfilePageState extends State<CoachProfilePage> {
               ],
             ),
             const SizedBox(height: 20),
-            const Row(
+            Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 Column(
@@ -334,7 +315,7 @@ class _CoachProfilePageState extends State<CoachProfilePage> {
                   color: Colors.grey[300],
                   borderRadius: BorderRadius.circular(10),
                 ),
-                child: const Row(
+                child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Padding(
@@ -347,7 +328,6 @@ class _CoachProfilePageState extends State<CoachProfilePage> {
                         ),
                       ),
                     ),
-                    Icon(Icons.arrow_forward),
                   ],
                 ),
               ),
@@ -364,7 +344,7 @@ class _CoachProfilePageState extends State<CoachProfilePage> {
                   color: Colors.grey[300],
                   borderRadius: BorderRadius.circular(10),
                 ),
-                child: const Column(
+                child:                Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
                     Row(
@@ -379,27 +359,30 @@ class _CoachProfilePageState extends State<CoachProfilePage> {
                         Icon(Icons.arrow_forward),
                       ],
                     ),
-                    SizedBox(height: 10),
+                    const SizedBox(height: 10),
                     Row(
                       children: [
                         CircleAvatar(
                           radius: 20,
-                          backgroundImage: NetworkImage('https://cdn-icons-png.flaticon.com/512/2585/2585583.png'),
+                          backgroundImage: NetworkImage(
+                              'https://cdn-icons-png.flaticon.com/512/2585/2585583.png'),
                         ),
                         SizedBox(width: 10),
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              'Johndoe',
-                              style: TextStyle(
-                                fontWeight: FontWeight.bold,
+                        Expanded(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                'Johndoe',
+                                style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                ),
                               ),
-                            ),
-                            Text(
-                              'Very good coach that helped me and \n encourages me to stay champion',
-                            ),
-                          ],
+                              Text(
+                                'Very good coach that helped me and encourages me to stay champion',
+                              ),
+                            ],
+                          ),
                         ),
                       ],
                     ),
@@ -444,9 +427,11 @@ class _CoachProfilePageState extends State<CoachProfilePage> {
                 ),
               ],
             ),
+            const SizedBox(height: 20),
           ],
         ),
       ),
     );
   }
 }
+

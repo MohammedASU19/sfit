@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:sfit/pages/SearchCoachPage.dart';
 
 class FilterPage extends StatefulWidget {
-  const FilterPage({super.key});
+  const FilterPage({Key? key});
 
   @override
   _FilterPageState createState() => _FilterPageState();
@@ -57,17 +57,21 @@ class _FilterPageState extends State<FilterPage> {
                     scrollDirection: Axis.horizontal,
                     child: Row(
                       children: [
-                        buildFilterOption("Experience"),
+                        _buildFilterOption("Experience"),
                         const SizedBox(width: 10),
-                        buildFilterOption("Available now"),
-                        const SizedBox(width: 10),
-                        buildFilterOption("Active"),
-                        const SizedBox(width: 10),
-                        buildFilterOption("Highly Rated"),
+                        _buildFilterOption("Available now"),
                       ],
                     ),
                   ),
                 ),
+              ],
+            ),
+            const SizedBox(height: 10),
+            Row(
+              children: [
+                _buildFilterOption("Active"),
+                const SizedBox(width: 10),
+                _buildFilterOption("Highly Rated"),
               ],
             ),
             const SizedBox(height: 20),
@@ -113,7 +117,9 @@ class _FilterPageState extends State<FilterPage> {
                 onPressed: () {
                   // Add logic to apply filters
                   Navigator.push(
-                    context, MaterialPageRoute(builder: (context) => const SearchCoachesPage()));
+                    context,
+                    MaterialPageRoute(builder: (context) => const SearchCoachesPage()),
+                  );
                 },
                 style: ElevatedButton.styleFrom(
                   backgroundColor: const Color.fromARGB(255, 94, 204, 255),
@@ -138,7 +144,7 @@ class _FilterPageState extends State<FilterPage> {
     );
   }
 
-  Widget buildFilterOption(String option) {
+  Widget _buildFilterOption(String option) {
     bool isSelected = selectedOption == option; // Check if option is selected
     return GestureDetector(
       onTap: () {

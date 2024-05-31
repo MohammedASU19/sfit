@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:sfit/pages/FavoriteCoachesListPage.dart';
+import 'package:sfit/pages/MySubscriptions.dart';
 import 'package:sfit/pages/SubscriptionPage.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:sfit/pages/LoginPage.dart';
@@ -81,8 +83,9 @@ class MyDrawer extends StatelessWidget {
           ),
           ListTile(
             leading: const Icon(Icons.sports_kabaddi_rounded),
-            title: const Text('Coaches'),
+            title: const Text('My Coaches'),
             onTap: () {
+              Navigator.push(context, MaterialPageRoute(builder: (context) => FavoriteCoaches(title: 'My Favorite Coaches',)));
               // Handle Coaches tap
             },
           ),
@@ -98,14 +101,8 @@ class MyDrawer extends StatelessWidget {
             leading: const Icon(Icons.credit_card_rounded),
             title: const Text('Subscriptions'),
             onTap: () {
+              Navigator.push(context, MaterialPageRoute(builder: (context) => MySubscriptionsPage()));
               // Handle Subscriptions tap
-            },
-          ),
-          ListTile(
-            leading: const Icon(Icons.calendar_month_sharp),
-            title: const Text('Schedule'),
-            onTap: () {
-              // Handle Schedule tap
             },
           ),
           const Divider(),

@@ -1,9 +1,35 @@
+import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
+import 'package:flutter/services.dart';
+import 'package:sfit/pages/MySubscriptions.dart'; // Add this import
 
-class GroupPlanPage extends StatelessWidget {
+class GroupPlanPage extends StatefulWidget {
   const GroupPlanPage({super.key});
+
+  @override
+  _GroupPlanPageState createState() => _GroupPlanPageState();
+}
+
+class _GroupPlanPageState extends State<GroupPlanPage> {
+  String? _selectedFriends;
+  String? _serialCode;
+  final List<String> _dropdownItems = [
+    '3 friends',
+    '4 friends',
+    '5 friends',
+    '6 friends',
+    '7 friends',
+    '8 friends',
+    '9 friends',
+    '10 friends',
+    '11 friends',
+    '12 friends',
+    '13 friends',
+    '14 friends',
+    '15 friends'
+  ];
 
   Future<void> _showPaymentDialog(BuildContext context) async {
     final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
@@ -67,7 +93,9 @@ class GroupPlanPage extends StatelessWidget {
                           );
                         }),
                         onChanged: (value) {
-                          _selectedMonth = value!;
+                          setState(() {
+                            _selectedMonth = value!;
+                          });
                         },
                       ),
                     ),
@@ -84,7 +112,9 @@ class GroupPlanPage extends StatelessWidget {
                           );
                         }),
                         onChanged: (value) {
-                          _selectedYear = value!;
+                          setState(() {
+                            _selectedYear = value!;
+                          });
                         },
                       ),
                     ),
@@ -111,15 +141,17 @@ class GroupPlanPage extends StatelessWidget {
               onPressed: () {
                 Navigator.of(context).pop();
               },
-              child: const Text('Cancel',style: TextStyle(fontWeight: FontWeight.bold, color: Colors.black)),
+              child: const Text('Cancel', style: TextStyle(fontWeight: FontWeight.bold, color: Colors.black)),
             ),
             ElevatedButton(
               style: ElevatedButton.styleFrom(
-                backgroundColor: const Color.fromARGB(255, 94, 204, 255),),
+                backgroundColor: const Color.fromARGB(255, 94, 204, 255),
+              ),
               onPressed: () {
                 if (_formKey.currentState!.validate()) {
-                  _saveSubscription(context, _cardNameController.text, _cardNumberController.text);
-                  Navigator.of(context).pop();
+                  _saveSubscription(context, _cardNameController.text, _cardNumberController.text).then((_) {
+                    Navigator.of(context).pop();
+                  });
                 }
               },
               child: const Text('Pay', style: TextStyle(fontWeight: FontWeight.bold, color: Colors.black)),
@@ -133,6 +165,7 @@ class GroupPlanPage extends StatelessWidget {
   Future<void> _saveSubscription(BuildContext context, String cardHolderName, String cardNumber) async {
     final user = FirebaseAuth.instance.currentUser;
     final DatabaseReference databaseRef = FirebaseDatabase.instance.reference().child('Subscriptions');
+    String serialCode = _generateSerialCode();
 
     if (user != null) {
       final newSubscription = {
@@ -141,19 +174,36 @@ class GroupPlanPage extends StatelessWidget {
         'subscription_type': 'Group Plan',
         'subscription_cost': '\$49.99',
         'subscription_duration': '1 Month',
-        'subscription_exp_date': DateTime.now().add(Duration(days: 30)).toIso8601String(),
+        'subscription_exp_date': DateTime.now().add(const Duration(days: 30)).toIso8601String(),
         'card_holder_name': '${cardHolderName[0]}*****${cardHolderName.substring(cardHolderName.length - 5)}',
         'card_number': '**** **** **** ${cardNumber.substring(cardNumber.length - 4)}',
+        'serial_code': serialCode,
+        'number_of_friends': _selectedFriends ?? 'N/A', // Handle null value
+        'plan_name': 'Premium Fitness',
+        'description': 'Access to premium fitness classes',
+        'features': [
+          'Personal trainer',
+          'Nutrition plan'
+        ],
       };
 
       await databaseRef.push().set(newSubscription);
 
       if (context.mounted) {
+        setState(() {
+          _serialCode = serialCode;
+        });
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(content: Text('Subscription successful!')),
         );
       }
     }
+  }
+
+  String _generateSerialCode() {
+    const String chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+    final Random random = Random();
+    return String.fromCharCodes(Iterable.generate(10, (_) => chars.codeUnitAt(random.nextInt(chars.length))));
   }
 
   @override
@@ -181,31 +231,30 @@ class GroupPlanPage extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const PlanDetailsCard(
+            PlanDetailsCard(
               title: 'Group Plan Details',
-              details: [
+              details: const [
                 'Plan Name: Premium Fitness',
                 'Description: Access to premium fitness classes',
                 'Price: \$49.99/month',
                 'Features: Personal trainer, nutrition plan',
                 'Number of Friends:',
               ],
-              dropdownItems: [
-                '3 friends',
-                '4 friends',
-                '5 friends',
-                '6 friends',
-                '7 friends',
-                '8 friends',
-                '9 friends',
-              ],
+              dropdownItems: _dropdownItems,
+              onDropdownChanged: (value) {
+                setState(() {
+                  _selectedFriends = value;
+                });
+              },
+              selectedValue: _selectedFriends,
             ),
-            const PlanDetailsCard(
+            PlanDetailsCard(
               title: 'Serial Code Sharing',
               details: [
-                'Your Serial Code: ABCDEF123',
+                'Your Serial Code: ${_serialCode ?? 'Not generated yet'}',
               ],
               hasButton: true,
+              serialCode: _serialCode,
             ),
             const SizedBox(height: 20.0),
             Center(
@@ -214,7 +263,7 @@ class GroupPlanPage extends StatelessWidget {
                   _showPaymentDialog(context);
                 },
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: Color.fromARGB(255, 94, 204, 255),
+                  backgroundColor: const Color.fromARGB(255, 94, 204, 255),
                   textStyle: const TextStyle(fontSize: 20.0, color: Colors.white),
                   minimumSize: const Size(300.0, 50.0),
                 ),
@@ -257,6 +306,9 @@ class PlanDetailsCard extends StatelessWidget {
   final List<String> details;
   final List<String>? dropdownItems;
   final bool hasButton;
+  final void Function(String?)? onDropdownChanged;
+  final String? selectedValue;
+  final String? serialCode;
 
   const PlanDetailsCard({
     super.key,
@@ -264,6 +316,9 @@ class PlanDetailsCard extends StatelessWidget {
     required this.details,
     this.dropdownItems,
     this.hasButton = false,
+    this.onDropdownChanged,
+    this.selectedValue,
+    this.serialCode,
   });
 
   @override
@@ -290,6 +345,7 @@ class PlanDetailsCard extends StatelessWidget {
           if (dropdownItems != null) ...[
             const SizedBox(height: 10.0),
             DropdownButton<String>(
+              value: selectedValue,
               items: dropdownItems!
                   .map(
                     (item) => DropdownMenuItem<String>(
@@ -298,7 +354,7 @@ class PlanDetailsCard extends StatelessWidget {
                     ),
                   )
                   .toList(),
-              onChanged: (value) {},
+              onChanged: onDropdownChanged,
               hint: const Text('Select number of friends'),
             ),
           ],
@@ -307,9 +363,16 @@ class PlanDetailsCard extends StatelessWidget {
           if (hasButton)
             Center(
               child: ElevatedButton(
-                onPressed: () {},
+                onPressed: serialCode != null
+                    ? () {
+                        Clipboard.setData(ClipboardData(text: serialCode!));
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(content: Text('Serial Code copied to clipboard!')),
+                        );
+                      }
+                    : null,
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: Color.fromARGB(255, 94, 204, 255),
+                  backgroundColor: const Color.fromARGB(255, 94, 204, 255),
                   padding: const EdgeInsets.symmetric(horizontal: 50, vertical: 15),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(10.0),

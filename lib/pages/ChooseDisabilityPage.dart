@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class ChooseDisabilityPage extends StatefulWidget {
-  const ChooseDisabilityPage({super.key});
+  const ChooseDisabilityPage({Key? key}) : super(key: key);
 
   @override
   _ChooseDisabilityPageState createState() => _ChooseDisabilityPageState();
@@ -58,8 +58,9 @@ class _ChooseDisabilityPageState extends State<ChooseDisabilityPage> {
             const SizedBox(height: 20),
             Expanded(
               child: GridView.count(
+                physics: NeverScrollableScrollPhysics(), // Prevents GridView from scrolling
                 crossAxisCount: 2,
-                childAspectRatio: 1.5, // Adjusted aspect ratio for cards
+                childAspectRatio: 1.3, // Adjusted aspect ratio for cards
                 crossAxisSpacing: 10,
                 mainAxisSpacing: 10,
                 children: <Widget>[
@@ -73,28 +74,25 @@ class _ChooseDisabilityPageState extends State<ChooseDisabilityPage> {
               ),
             ),
             const SizedBox(height: 20),
-            Align(
-              alignment: Alignment.bottomRight,
-              child: SizedBox(
-                width: 100, // Adjusted width of the button
-                height: 40,
-                child: ElevatedButton(
-                  onPressed: () {
-                    String? selectedAbility = _uniqueAbilityController.text.isNotEmpty
-                        ? _uniqueAbilityController.text
-                        : null;
-                    Navigator.pop(context, selectedAbility);
-                  },
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.blue,
-                  ),
-                  child: const Text(
-                    "Next",
-                    style: TextStyle(
-                      color: Colors.black,
-                      fontWeight: FontWeight.bold, // Set text to bold
-                      fontSize: 16, // Adjust text size
-                    ),
+            SizedBox(
+              width: double.infinity, // Full width button
+              height: 40,
+              child: ElevatedButton(
+                onPressed: () {
+                  String? selectedAbility = _uniqueAbilityController.text.isNotEmpty
+                      ? _uniqueAbilityController.text
+                      : null;
+                  Navigator.pop(context, selectedAbility);
+                },
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.blue,
+                ),
+                child: const Text(
+                  "Next",
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 16,
                   ),
                 ),
               ),
@@ -121,11 +119,12 @@ class _ChooseDisabilityPageState extends State<ChooseDisabilityPage> {
                 size: 40,
                 color: Colors.black,
               ),
-              const SizedBox(height: 10),
+              const SizedBox(height: 8),
               Text(
                 text,
+                textAlign: TextAlign.center,
                 style: const TextStyle(
-                  fontSize: 16,
+                  fontSize: 14,
                   fontWeight: FontWeight.bold,
                   color: Colors.black,
                 ),

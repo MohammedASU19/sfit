@@ -154,6 +154,12 @@ class _LoginPageState extends State<LoginPage> {
                             const Text('Remember Me'),
                           ],
                         ),
+                      ],
+                    ),
+                    const SizedBox(height: 10),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: [
                         GestureDetector(
                           onTap: () {
                             Navigator.push(

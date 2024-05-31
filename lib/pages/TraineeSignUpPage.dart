@@ -1,15 +1,15 @@
 import 'dart:io';
-import 'package:image_picker/image_picker.dart';
 import 'package:flutter/material.dart';
-import 'package:sfit/pages/LoginPage.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
+import 'package:sfit/pages/LoginPage.dart';
 import 'package:sfit/pages/GuardianSetup.dart';
 import 'package:sfit/pages/ChooseDisabilityPage.dart';
 
 class SignUpPage extends StatelessWidget {
-  const SignUpPage({super.key});
+  const SignUpPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +27,7 @@ class SignUpPage extends StatelessWidget {
 }
 
 class SignUpForm extends StatefulWidget {
-  const SignUpForm({super.key});
+  const SignUpForm({Key? key}) : super(key: key);
 
   @override
   _SignUpFormState createState() => _SignUpFormState();
@@ -163,6 +163,8 @@ class _SignUpFormState extends State<SignUpForm> {
                         onSaved: (value) {
                           _day = value;
                         },
+                        isExpanded: true,
+                        // dropdownWidth: 100, // Uncomment this line to set a fixed width
                       ),
                     ),
                     const SizedBox(width: 10.0),
@@ -185,6 +187,8 @@ class _SignUpFormState extends State<SignUpForm> {
                         onSaved: (value) {
                           _month = value;
                         },
+                        isExpanded: true,
+                        // dropdownWidth: 100, // Uncomment this line to set a fixed width
                       ),
                     ),
                     const SizedBox(width: 10.0),
@@ -209,6 +213,8 @@ class _SignUpFormState extends State<SignUpForm> {
                         onSaved: (value) {
                           _year = value;
                         },
+                        isExpanded: true,
+                        // dropdownWidth: 100, // Uncomment this line to set a fixed width
                       ),
                     ),
                   ],

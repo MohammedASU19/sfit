@@ -100,7 +100,7 @@ class IntroductionPage extends StatelessWidget {
                       'lib/images/Intro.png',
                       width: double.infinity,
                       height: 110.0,
-                      fit: BoxFit.cover,
+                      fit: BoxFit.fitWidth,
                     ),
                   ],
                 ),
@@ -201,7 +201,7 @@ class IntroductionPage extends StatelessWidget {
                   padding: const EdgeInsets.symmetric(horizontal: 40.0, vertical: 15.0),
                 ),
                 child: const Text(
-                  'Find Coach',
+                  'Get Started',
                   style: TextStyle(
                     color: Colors.black,
                     fontSize: 18.0,

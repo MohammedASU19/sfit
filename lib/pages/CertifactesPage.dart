@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class CertificatesPage extends StatelessWidget {
-  const CertificatesPage({super.key});
+  const CertificatesPage({Key? key});
 
   @override
   Widget build(BuildContext context) {
@@ -21,30 +21,29 @@ class CertificatesPage extends StatelessWidget {
         ),
         centerTitle: true,
       ),
-      body: const Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            CertificateCard(
-              imageUrl: 'https://marketplace.canva.com/EADaoR1v0uE/1/0/1600w/canva-dark-blue-%26-beige-simple-sport-certificate-8vBJASueSfE.jpg',
-              title: 'Certificate 1',
-              certificationType: 'Certification Type: Level 3 Coaching',
-            ),
-            SizedBox(height: 20),
-            CertificateCard(
-              imageUrl: 'https://marketplace.canva.com/EADaoR1v0uE/1/0/1600w/canva-dark-blue-%26-beige-simple-sport-certificate-8vBJASueSfE.jpg',
-              title: 'Certificate 2',
-              certificationType: 'Certification Type: Football Coaching',
-            ),
-            SizedBox(height: 20),
-            CertificateCard(
-              imageUrl: 'https://marketplace.canva.com/EADaoR1v0uE/1/0/1600w/canva-dark-blue-%26-beige-simple-sport-certificate-8vBJASueSfE.jpg',
-              title: 'Certificate 3',
-              certificationType: 'Certification Type: Tennis Coaching',
-            ),
-          ],
-        ),
+      body: Column(
+        children: [
+          CertificateCard(
+            imageUrl:
+                'https://marketplace.canva.com/EADaoR1v0uE/1/0/1600w/canva-dark-blue-%26-beige-simple-sport-certificate-8vBJASueSfE.jpg',
+            title: 'Certificate 1',
+            certificationType: 'Certification Type: Level 3 Coaching',
+          ),
+          const SizedBox(height: 20),
+          CertificateCard(
+            imageUrl:
+                'https://marketplace.canva.com/EADaoR1v0uE/1/0/1600w/canva-dark-blue-%26-beige-simple-sport-certificate-8vBJASueSfE.jpg',
+            title: 'Certificate 2',
+            certificationType: 'Certification Type: Football Coaching',
+          ),
+          const SizedBox(height: 20),
+          CertificateCard(
+            imageUrl:
+                'https://marketplace.canva.com/EADaoR1v0uE/1/0/1600w/canva-dark-blue-%26-beige-simple-sport-certificate-8vBJASueSfE.jpg',
+            title: 'Certificate 3',
+            certificationType: 'Certification Type: Tennis Coaching',
+          ),
+        ],
       ),
     );
   }
@@ -55,11 +54,12 @@ class CertificateCard extends StatelessWidget {
   final String title;
   final String certificationType;
 
-  const CertificateCard({super.key, 
+  const CertificateCard({
+    Key? key,
     required this.imageUrl,
     required this.title,
     required this.certificationType,
-  });
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -72,7 +72,7 @@ class CertificateCard extends StatelessWidget {
           Image.network(
             imageUrl,
             width: double.infinity,
-            height: 200,
+            height: 150, // Adjusted height to 150
             fit: BoxFit.cover,
           ),
           Padding(

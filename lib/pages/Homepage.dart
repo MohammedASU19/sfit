@@ -26,25 +26,26 @@ class SportsCoachesPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white, // Set background color of the scaffold to white
+      backgroundColor: Colors.white,
       appBar: AppBar(
-        backgroundColor: Colors.white, // Set background color of the app bar to white
+        backgroundColor: Colors.white,
         title: Row(
           children: <Widget>[
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: CircleAvatar(
                 radius: 20,
-                backgroundImage: NetworkImage(userDetails['profileImageUrl'] ?? 'https://cdn-icons-png.flaticon.com/512/2585/2585583.png'),
+                backgroundImage: NetworkImage(
+                    userDetails['profileImageUrl'] ?? 'https://cdn-icons-png.flaticon.com/512/2585/2585583.png'),
               ),
             ),
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
-                const Text('Welcome', style: TextStyle(color: Colors.black)), // Set text color to black
+                const Text('Welcome', style: TextStyle(color: Colors.black)),
                 Text(
                   userDetails['username'] ?? 'User',
-                  style: const TextStyle(color: Colors.black), // Set text color to black
+                  style: const TextStyle(color: Colors.black),
                 ),
               ],
             ),
@@ -53,269 +54,275 @@ class SportsCoachesPage extends StatelessWidget {
         ),
       ),
       drawer: MyDrawer(userDetails: userDetails),
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: <Widget>[
-          const Divider(
-            color: Colors.grey,
-            thickness: 1,
-          ),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Row(
-              children: <Widget>[
-                const Text(
-                  'See another sport?',
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 20,
-                  ),
-                ),
-                const Spacer(),
-                IconButton(
-                  icon: const Icon(Icons.search),
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => SportsInterestsPage(userDetails: userDetails)),
-                    );
-                  },
-                ),
-              ],
+      body: SingleChildScrollView(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: <Widget>[
+            const Divider(
+              color: Colors.grey,
+              thickness: 1,
             ),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: <Widget>[
-                GestureDetector(
-                  onTap: () {},
-                  child: Container(
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(10),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Row(
+                children: <Widget>[
+                  const Text(
+                    'See another sport?',
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 20,
                     ),
-                    padding: const EdgeInsets.all(8),
-                    child: const Icon(Icons.sports_soccer, size: 40, color: Colors.black),
                   ),
-                ),
-                GestureDetector(
-                  onTap: () {},
-                  child: Container(
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                    padding: const EdgeInsets.all(8),
-                    child: const Icon(Icons.sports_basketball, size: 40, color: Colors.black),
+                  const Spacer(),
+                  IconButton(
+                    icon: const Icon(Icons.search),
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => SportsInterestsPage(userDetails: userDetails)),
+                      );
+                    },
                   ),
-                ),
-                GestureDetector(
-                  onTap: () {},
-                  child: Container(
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                    padding: const EdgeInsets.all(8),
-                    child: const Icon(Icons.sports_tennis, size: 40, color: Colors.black),
-                  ),
-                ),
-                GestureDetector(
-                  onTap: () {},
-                  child: Container(
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                    padding: const EdgeInsets.all(8),
-                    child: const Icon(Icons.sports_mma, size: 40, color: Colors.black),
-                  ),
-                ),
-              ],
-            ),
-          ),
-          const Padding(
-            padding: EdgeInsets.all(8.0),
-            child: Text(
-              'Best ranked coaches',
-              style: TextStyle(
-                fontSize: 20,
-                fontWeight: FontWeight.bold,
+                ],
               ),
             ),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Row(
-              children: <Widget>[
-                Expanded(
-                  child: Stack(
-                    children: <Widget>[
-                      Container(
-                        width: double.infinity,
-                        height: 200,
-                        decoration: BoxDecoration(
-                          image: const DecorationImage(
-                            image: NetworkImage('https://cdn.shopify.com/s/files/1/0472/7455/7591/files/matjaz1.jpg?v=1623150466'),
-                            fit: BoxFit.cover,
-                          ),
-                          borderRadius: BorderRadius.circular(10),
-                          color: Colors.grey[200],
-                        ),
-                        child: const Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          crossAxisAlignment: CrossAxisAlignment.end,
-                          children: <Widget>[
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              mainAxisAlignment: MainAxisAlignment.end,
-                              children: <Widget>[
-                                Text(
-                                  'Table Tennis',
-                                  style: TextStyle(
-                                    color: Colors.white, // Changed text color to white
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
-                                Text(
-                                  'Khaled Al-Ahmad',
-                                  style: TextStyle(
-                                    color: Colors.white, // Changed text color to white
-                                  ),
-                                ),
-                              ],
-                            ),
-                            Padding(
-                              padding: EdgeInsets.fromLTRB(0, 0, 8, 8),
-                              child: CircleAvatar(
-                                radius: 15,
-                                backgroundColor: Color.fromARGB(255, 255, 231, 94),
-                                child: Text(
-                                  '#1',
-                                  style: TextStyle(
-                                    color: Colors.black,
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: <Widget>[
+                  GestureDetector(
+                    onTap: () {},
+                    child: Container(
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(10),
                       ),
-                      const Positioned(
-                        top: 8,
-                        right: 8,
-                        child: Icon(Icons.star, color: Color.fromARGB(255, 255, 231, 94)),
-                      ),
-                    ],
+                      padding: const EdgeInsets.all(8),
+                      child: const Icon(Icons.sports_soccer, size: 40, color: Colors.black),
+                    ),
                   ),
-                ),
-                IconButton(
-                  icon: const Icon(Icons.arrow_forward),
-                  onPressed: () {
-                    // Handle arrow tap
-                  },
-                ),
-              ],
-            ),
-          ),
-          const SizedBox(height: 8),
-          const Padding(
-            padding: EdgeInsets.all(8.0),
-            child: Text(
-              'Quick Sessions',
-              style: TextStyle(
-                fontSize: 20,
-                fontWeight: FontWeight.bold,
+                  GestureDetector(
+                    onTap: () {},
+                    child: Container(
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      padding: const EdgeInsets.all(8),
+                      child: const Icon(Icons.sports_basketball, size: 40, color: Colors.black),
+                    ),
+                  ),
+                  GestureDetector(
+                    onTap: () {},
+                    child: Container(
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      padding: const EdgeInsets.all(8),
+                      child: const Icon(Icons.sports_tennis, size: 40, color: Colors.black),
+                    ),
+                  ),
+                  GestureDetector(
+                    onTap: () {},
+                    child: Container(
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      padding: const EdgeInsets.all(8),
+                      child: const Icon(Icons.sports_mma, size: 40, color: Colors.black),
+                    ),
+                  ),
+                ],
               ),
             ),
-          ),
-          Expanded(
-            child: Row(
-              children: <Widget>[
-                Expanded(
-                  child: Column(
-                    children: <Widget>[
-                      Container(
-                        width: double.infinity,
-                        height: 150,
-                        decoration: BoxDecoration(
-                          image: const DecorationImage(
-                            image: AssetImage('lib/images/basketball.jpeg'), // Changed to local asset
-                            fit: BoxFit.cover,
-                          ),
-                          borderRadius: BorderRadius.circular(10),
-                          color: Colors.grey[200],
-                        ),
-                        child: const Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          mainAxisAlignment: MainAxisAlignment.end,
-                          children: <Widget>[
-                            Text(
-                              'Basketball',
-                              style: TextStyle(
-                                color: Colors.white, // Changed text color to white
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                            Text(
-                              'Saleh Alhaj',
-                              style: TextStyle(
-                                color: Colors.white, // Changed text color to white
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ],
-                  ),
+            const Padding(
+              padding: EdgeInsets.all(8.0),
+              child: Text(
+                'Best ranked coaches',
+                style: TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
                 ),
-                const SizedBox(width: 8),
-                Expanded(
-                  child: Column(
-                    children: <Widget>[
-                      Container(
-                        width: double.infinity,
-                        height: 150,
-                        decoration: BoxDecoration(
-                          image: const DecorationImage(
-                            image: AssetImage('lib/images/volleyball.jpg'), // Changed to local asset
-                            fit: BoxFit.cover,
-                          ),
-                          borderRadius: BorderRadius.circular(10),
-                          color: Colors.grey[200],
-                        ),
-                        child: const Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          mainAxisAlignment: MainAxisAlignment.end,
-                          children: <Widget>[
-                            Text(
-                              'Volleyball',
-                              style: TextStyle(
-                                color: Colors.white, // Changed text color to white
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                            Text(
-                              'Omar Khader',
-                              style: TextStyle(
-                                color: Colors.white, // Changed text color to white
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ],
+              ),
             ),
-          ),
-        ],
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Row(
+                children: <Widget>[
+                  Expanded(
+                    child: Stack(
+                      children: <Widget>[
+                        Container(
+                          width: double.infinity,
+                          height: 200,
+                          decoration: BoxDecoration(
+                            image: const DecorationImage(
+                              image: NetworkImage(
+                                  'https://cdn.shopify.com/s/files/1/0472/7455/7591/files/matjaz1.jpg?v=1623150466'),
+                              fit: BoxFit.cover,
+                            ),
+                            borderRadius: BorderRadius.circular(10),
+                            color: Colors.grey[200],
+                          ),
+                          child: const Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            crossAxisAlignment: CrossAxisAlignment.end,
+                            children: <Widget>[
+                              Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                mainAxisAlignment: MainAxisAlignment.end,
+                                children: <Widget>[
+                                  Text(
+                                    'Table Tennis',
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                  Text(
+                                    'Khaled Al-Ahmad',
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.fromLTRB(0, 0, 8, 8),
+                                child: CircleAvatar(
+                                  radius: 15,
+                                  backgroundColor: const Color.fromARGB(255, 255, 231, 94),
+                                  child: Text(
+                                    '#1',
+                                    style: TextStyle(
+                                      color: Colors.black,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                        const Positioned(
+                          top: 8,
+                          right: 8,
+                          child: Icon(Icons.star, color: Color.fromARGB(255, 255, 231, 94)),
+                        ),
+                      ],
+                    ),
+                  ),
+                  IconButton(
+                    icon: const Icon(Icons.arrow_forward),
+                    onPressed: () {
+                      // Handle arrow tap
+                    },
+                  ),
+                ],
+              ),
+            ),
+            const SizedBox(height: 8),
+            const Padding(
+              padding: EdgeInsets.all(8.0),
+              child: Text(
+                'Quick Sessions',
+                style: TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Row(
+                children: <Widget>[
+                  Expanded(
+                    child: Column(
+                      children: <Widget>[
+                        Container(
+                          width: double.infinity,
+                          height: 150,
+                          decoration: BoxDecoration(
+                            image: const DecorationImage(
+                              image: AssetImage('lib/images/basketball.jpeg'),
+                              fit: BoxFit.cover,
+                            ),
+                            borderRadius: BorderRadius.circular(10),
+                            color: Colors.grey[200],
+                          ),
+                          child: const Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            children: <Widget>[
+                              Text(
+                                'Basketball',
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                              Text(
+                                'Saleh Alhaj',
+                                style: TextStyle(
+                                  color: Colors.white,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  const SizedBox(width: 8),
+                  Expanded(
+                    child: Column(
+                      children: <Widget>[
+                        Container(
+                          width: double.infinity,
+                          height: 150,
+                          decoration: BoxDecoration(
+                            image: const DecorationImage(
+                              image: AssetImage('lib/images/volleyball.jpg'),
+                              fit: BoxFit.cover,
+                            ),
+                            borderRadius: BorderRadius.circular(10),
+                            color: Colors.grey[200],
+                          ),
+                          child: const Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            children: <Widget>[
+                              Text(
+                                'Volleyball',
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                              Text(
+                                'Omar Khader',
+                                style: TextStyle(
+                                  color: Colors.white,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            const SizedBox(height: 8),
+            const SizedBox(height: 8), // Adjusted to provide a slight extra space
+          ],
+        ),
       ),
       bottomNavigationBar: BottomAppBar(
-        color: Colors.white, // Set background color of the bottom app bar to white
+        color: Colors.white,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: <Widget>[
@@ -338,7 +345,7 @@ class SportsCoachesPage extends StatelessWidget {
               onPressed: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => const FavoriteCoaches(title: 'Favorite Coaches',)),
+                  MaterialPageRoute(builder: (context) => const FavoriteCoaches(title: 'Favorite Coaches')),
                 );
               },
             ),
@@ -353,7 +360,7 @@ class SportsCoachesPage extends StatelessWidget {
                       if (isCoach) {
                         Navigator.push(
                           context,
-                          MaterialPageRoute(builder: (context) => const CoachProfilePage(userDetails: {},)),
+                          MaterialPageRoute(builder: (context) => const CoachProfilePage(userDetails: {})),
                         );
                       } else {
                         Navigator.push(
@@ -374,3 +381,4 @@ class SportsCoachesPage extends StatelessWidget {
     );
   }
 }
+
